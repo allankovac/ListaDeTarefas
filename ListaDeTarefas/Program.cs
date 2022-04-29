@@ -62,9 +62,11 @@ app.Run();
 void RegistrarRepository(IServiceCollection servico)
 {
     servico.AddTransient<IUsuarioRepository, UsuarioRepository>();
+    servico.AddTransient<ITarefaRepository, TarefaRepository>();
 }
 
 void RegistrarBusiness(IServiceCollection servico)
 {
     servico.AddTransient<IUsuarioBusiness, UsuarioBusiness>();
+    servico.AddTransient<ITarefaBusiness, TarefaBusiness>();
 }
