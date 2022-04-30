@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ListaDeTarefas.Models.Tarefa>
+﻿@model TarefaViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -6,35 +6,58 @@
 
 <h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="CriarTarefa">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="@Model.Tarefa.Titulo" class="control-label"></label>
+                <input asp-for="@Model.Tarefa.Titulo" class="form-control" />
+                <span asp-validation-for="@Model.Tarefa.Titulo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Tarefa.Descricao" class="control-label"></label>
+                <input asp-for="@Model.Tarefa.Descricao" class="form-control" />
+                <span asp-validation-for="@Model.Tarefa.Descricao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Tarefa.DtTarefaFim" class="control-label"></label>
+                <input asp-for="@Model.Tarefa.DtTarefaFim" class="form-control" />
+                <span asp-validation-for="@Model.Tarefa.DtTarefaFim" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Titulo)
+                @Html.DisplayNameFor(model => model.Tarefa.Titulo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Descricao)
+                @Html.DisplayNameFor(model => model.Tarefa.Descricao)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DtTarefaFim)
+                @Html.DisplayNameFor(model => model.Tarefa.DtTarefaFim)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DtEncerramento)
+                @Html.DisplayNameFor(model => model.Tarefa.DtEncerramento)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Finalizado)
+                @Html.DisplayNameFor(model => model.Tarefa.Finalizado)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Usuario)
+                @Html.DisplayNameFor(model => model.Tarefa.Usuario)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.Tarefas) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Titulo)

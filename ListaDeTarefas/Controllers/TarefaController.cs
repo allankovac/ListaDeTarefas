@@ -1,5 +1,6 @@
 ﻿using ListaDeTarefas.Business.Interface;
 using ListaDeTarefas.Models;
+using ListaDeTarefas.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ListaDeTarefas.Controllers
@@ -15,14 +16,13 @@ namespace ListaDeTarefas.Controllers
 
         public IActionResult Index()
         {
-            
-            return View(new List<Tarefa>());
+            var tarefa = new TarefaViewModel
+            {
+                Tarefas = _tarefaBusiness.ListaTarefa()
+            };
+            return View(tarefa);
         }
 
-        public IActionResult CriarTarefa()
-        {
-            return View();
-        }
         [HttpPost]
         public IActionResult CriarTarefa(Tarefa tarefa)
         {

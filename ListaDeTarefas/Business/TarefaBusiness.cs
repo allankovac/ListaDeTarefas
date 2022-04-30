@@ -17,5 +17,11 @@ namespace ListaDeTarefas.Business
         {
             _tarefaRepository.CriarTarefaNoBd(tarefa);
         }
+
+
+        public List<Tarefa> ListaTarefa()
+        {
+            return _tarefaRepository.RetornarTodasAsTarefas();
+        }
     }
 }

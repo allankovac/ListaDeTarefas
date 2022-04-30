@@ -18,5 +18,10 @@ namespace ListaDeTarefas.Repository
             _context.Tarefas.Add(tarefa);
             _context.SaveChanges();
         }
+
+        public List<Tarefa> RetornarTodasAsTarefas()
+        {
+            return _context.Tarefas.ToList();
+        }
     }
 }
