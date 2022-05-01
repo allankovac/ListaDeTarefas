@@ -6,5 +6,6 @@ namespace ListaDeTarefas.Repository.Interfaces
     {
         void CriarTarefaNoBd(Tarefa tarefa);
         List<Tarefa> RetornarTodasAsTarefas();
+        List<Tarefa> RetornarTodasAsTarefasDoUsuario(int id);
     }
 }

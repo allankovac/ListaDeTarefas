@@ -23,5 +23,9 @@ namespace ListaDeTarefas.Business
         {
             return _tarefaRepository.RetornarTodasAsTarefas();
         }
+        public List<Tarefa> ListaTarefasDoUsuario(int id)
+        {
+            return _tarefaRepository.RetornarTodasAsTarefasDoUsuario(id);
+        }
     }
 }

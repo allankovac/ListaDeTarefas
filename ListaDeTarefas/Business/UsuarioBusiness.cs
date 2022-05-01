@@ -34,14 +34,14 @@ namespace ListaDeTarefas.Business
             }
         }
 
-        public bool UsuarioCadastrado(Usuario usuario)
+        public Usuario UsuarioCadastrado(Usuario usuario)
         {
             var usuarioDb = _usuarioRepository.RetornarUsuarioPorEmail(usuario.Email);
 
             if (usuarioDb.Senha == usuario.Senha)
-                return true;
+                return usuarioDb;
 
-            return false;
+            return null;
         }
     }
 }

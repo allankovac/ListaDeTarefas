@@ -6,5 +6,7 @@ namespace ListaDeTarefas.Business.Interface
     {
         void CriarTarefa(Tarefa tarefa);
         List<Tarefa> ListaTarefa();
+
+        List<Tarefa> ListaTarefasDoUsuario(int id);
     }
 }

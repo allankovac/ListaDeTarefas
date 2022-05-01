@@ -23,5 +23,10 @@ namespace ListaDeTarefas.Repository
         {
             return _context.Tarefas.ToList();
         }
+        public List<Tarefa> RetornarTodasAsTarefasDoUsuario(int id)
+        {
+            return _context.Tarefas.Where(t => t.UsuarioId == id).ToList();
+        }
+
     }
 }

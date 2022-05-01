@@ -14,11 +14,12 @@ namespace ListaDeTarefas.Controllers
             _tarefaBusiness = tarefaBusiness;
         }
 
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult ListarTarefas(int id)
         {
             var tarefa = new TarefaViewModel
             {
-                Tarefas = _tarefaBusiness.ListaTarefa()
+                Tarefas = _tarefaBusiness.ListaTarefasDoUsuario(id)
             };
             return View(tarefa);
         }
