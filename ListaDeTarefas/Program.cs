@@ -58,15 +58,24 @@ app.MapControllerRoute(
 
 app.Run();
 
+//void ConfigurandoSession(IServiceCollection servico)
+//{
+//    servico.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+//    servico.AddMemoryCache();
+//    servico.AddSession();
+//}
 
 void RegistrarRepository(IServiceCollection servico)
 {
     servico.AddTransient<IUsuarioRepository, UsuarioRepository>();
     servico.AddTransient<ITarefaRepository, TarefaRepository>();
+    servico.AddTransient<ISessaoRepository, SessaoRepository>();
 }
 
 void RegistrarBusiness(IServiceCollection servico)
 {
     servico.AddTransient<IUsuarioBusiness, UsuarioBusiness>();
     servico.AddTransient<ITarefaBusiness, TarefaBusiness>();
+    servico.AddTransient<ISessaoBusiness, SessaoBusiness>();
 }
