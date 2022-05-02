@@ -8,5 +8,7 @@ namespace ListaDeTarefas.Business.Interface
         List<Tarefa> ListaTarefa();
 
         List<Tarefa> ListaTarefasDoUsuario(string id);
+
+        void FinalizarTarefa(int id);
     }
 }

@@ -44,11 +44,14 @@ namespace ListaDeTarefas.Controllers
 
         public IActionResult RegistrarUsuario()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("ListarTarefas", "Tarefa");
+            }
             return View();
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> RegistrarUsuario(LoginViewModel usuario)
         {
             var user = new IdentityUser {UserName = usuario.Usuario.Email, Email = usuario.Usuario.Email };

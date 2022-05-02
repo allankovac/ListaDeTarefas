@@ -1,24 +1,4 @@
-﻿$(document).ready(function () {
-    let data = sessionStorage.getItem('sessao');
-
-    if (data != null) {
-        let request = $.ajax({
-            url: "/sessao/ValidarSessao",
-            data: {
-                id: data
-            },
-            type: "post",
-        });
-
-        request.done(function (response, textStatus, jqXHR) {
-            if (response.valido) {
-                window.location.replace(`/tarefa/ListarTarefas/${response.usuario}`);
-            }
-        });
-    }
-});
-
-function RetornaObjetoDoFormulario() {
+﻿function RetornaObjetoDoFormulario() {
     let objeto = {};
 
     $('#formularioLogin div input').each((i, z) => {
@@ -46,5 +26,20 @@ function AjaxLogin() {
                 window.location.replace(`/tarefa/ListarTarefas/${response.usuario}`);
             }
         }
+    });
+}
+
+
+function AjaxRegistro() {
+    let data = RetornaObjetoDoFormulario();
+    console.log(data);
+    let request = $.ajax({
+        url: "/login/RegistrarUsuario",
+        data: data,
+        type: "post",
+    });
+
+    request.done(function (response, textStatus, jqXHR) {
+        window.location.replace(`/tarefa/ListarTarefas/`);
     });
 }

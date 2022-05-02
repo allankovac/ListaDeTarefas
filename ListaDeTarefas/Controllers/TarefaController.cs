@@ -36,5 +36,14 @@ namespace ListaDeTarefas.Controllers
             _tarefaBusiness.CriarTarefa(tarefa, User.Identity.Name);
             return Json(new { status = "sucesso", mensagem = "Tarefa cadastrada com sucesso!" });
         }
+
+        [HttpPost]
+        public IActionResult FinalizarTarefa(int id)
+        {
+
+            _tarefaBusiness.FinalizarTarefa(id);
+            return Json(new { status = "sucesso", mensagem = "Tarefa finalizada com sucesso!" });
+        }
+
     }
 }

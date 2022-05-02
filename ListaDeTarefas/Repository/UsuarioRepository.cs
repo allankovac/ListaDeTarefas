@@ -31,7 +31,7 @@ namespace ListaDeTarefas.Repository
         {
             try
             {
-                return _context.Usuarios.Include(u => u.Tarefas).FirstOrDefault(u => u.Email == email);
+                return _context.Usuarios.Include(u => u.Tarefa).FirstOrDefault(u => u.Email == email);
             }
             catch (Exception ex)
             {

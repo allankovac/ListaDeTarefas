@@ -26,3 +26,21 @@ function AjaxRegistrarTarefas() {
         }
     });
 }
+
+function AjaxFinalizarTarefa(id) {
+    let request = $.ajax({
+        url: "/tarefa/FinalizarTarefa",
+        data: {
+            id: id
+        },
+        type: "post",
+    });
+
+    request.done(function (response, textStatus, jqXHR) {
+        if (response.status === "sucesso") {
+            alert(response.mensagem);
+
+            window.location.replace(`/tarefa/ListarTarefas/`);
+        }
+    });
+}

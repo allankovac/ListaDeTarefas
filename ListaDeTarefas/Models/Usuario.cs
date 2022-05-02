@@ -10,6 +10,6 @@ namespace ListaDeTarefas.Models
         public string Email { get; set; }
         public string Senha { get; set; }
 
-        public virtual List<Tarefa> Tarefas { get; set; }
+        public virtual List<Tarefa> Tarefa { get; set; }
     }
 }
