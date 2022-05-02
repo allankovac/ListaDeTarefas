@@ -11,40 +11,41 @@
         });
 
         request.done(function (response, textStatus, jqXHR) {
-            if (response.valido) {
-                window.location.replace(`/tarefa/ListarTarefas/${response.usuario}`);
+            if (!response.valido) {
+                window.location.replace(`/login`);
             }
         });
     }
+    else {
+        window.location.replace(`/login`);
+    }
+
 });
 
 function RetornaObjetoDoFormulario() {
     let objeto = {};
 
-    $('#formularioLogin div input').each((i, z) => {
+    $('#formularioTarefa div input').each((i, z) => {
         objeto[z.name] = z.value;
     });
 
     return objeto;
 }
 
-function AjaxLogin() {
+function AjaxRegistrarTarefas() {
     let data = RetornaObjetoDoFormulario();
 
     let request = $.ajax({
-        url: "/login/Login",
+        url: "/tarefa/CriarTarefa",
         data: data,
         type: "post",
     });
 
     request.done(function (response, textStatus, jqXHR) {
-        if (response.usuario > 0) {
-            let data = sessionStorage.getItem('sessao');
-            if (data == null) {
-                sessionStorage.setItem('sessao', response.sessao);
+        if (response.status === "sucesso") {
+            alert(response.mensagem);
 
-                window.location.replace(`/tarefa/ListarTarefas/${response.usuario}`);
-            }
+            window.location.replace(`/tarefa/CriarTarefa/${$("#UsuarioId").value}`);
         }
     });
 }

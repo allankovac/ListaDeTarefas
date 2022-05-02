@@ -19,7 +19,11 @@ namespace ListaDeTarefas.Controllers
         {
             var tarefa = new TarefaViewModel
             {
-                Tarefas = _tarefaBusiness.ListaTarefasDoUsuario(id)
+                Tarefas = _tarefaBusiness.ListaTarefasDoUsuario(id),
+                Tarefa = new Tarefa
+                {
+                    UsuarioId = id
+                }
             };
             return View(tarefa);
         }
@@ -28,7 +32,7 @@ namespace ListaDeTarefas.Controllers
         public IActionResult CriarTarefa(Tarefa tarefa)
         {
             _tarefaBusiness.CriarTarefa(tarefa);
-            return View();
+            return Json(new { status = "sucesso", mensagem = "Tarefa cadastrada com sucesso!"});
         }
     }
 }

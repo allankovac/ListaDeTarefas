@@ -8,9 +8,9 @@
 
 <div class="row">
     <div class="col-md-12">
-        <form asp-action="CriarTarefa">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div id = "formularioTarefa">
             <div class="form-group">
+                <input asp-for="@Model.Tarefa.UsuarioId" class="form-control" value="@Model.Tarefa.UsuarioId" hidden/>
                 <label asp-for="@Model.Tarefa.Titulo" class="control-label"></label>
                 <input asp-for="@Model.Tarefa.Titulo" class="form-control" />
                 <span asp-validation-for="@Model.Tarefa.Titulo" class="text-danger"></span>
@@ -26,9 +26,9 @@
                 <span asp-validation-for="@Model.Tarefa.DtTarefaFim" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <button type="button" class="btn btn-primary" onclick="AjaxRegistrarTarefas()">Salvar</button>
             </div>
-        </form>
+        </div>
     </div>
 </div>
 
@@ -57,32 +57,41 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Tarefas) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Titulo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descricao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DtTarefaFim)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DtEncerramento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Finalizado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Usuario.Id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Tarefas)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Titulo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DtTarefaFim)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DtEncerramento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Finalizado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Usuario.Id)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script src="~/js/Tarefa/script.js"></script>
+
+}

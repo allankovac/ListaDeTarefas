@@ -27,7 +27,7 @@ namespace ListaDeTarefas.Controllers
             string idSessao = string.Empty;
             if (usuarioCadastrado != null)
             {
-                idSessao =_sessaoBusiness.CriarSessao(usuarioCadastrado);
+                idSessao = _sessaoBusiness.CriarSessao(usuarioCadastrado);
 
 
                 return Json(new { sessao = idSessao, usuario = usuarioCadastrado.Id });
@@ -43,6 +43,17 @@ namespace ListaDeTarefas.Controllers
         [HttpPost]
         public IActionResult RegistrarUsuario(Usuario usuario)
         {
+            //if (ModelState.IsValid)
+            //{
+            //    var user = new IdentityUser { UserName = registroVM.UserName };
+            //    var result = await _userManager.CreateAsync(user, registroVM.Password);
+
+            //    if (result.Succeeded)
+            //    {
+            //        return RedirectToAction("Login", "Account");
+            //    }
+            //    return View(loginVM);
+            //}
             var usuarioCriado = _usuarioBusiness.CriarUsuario(usuario);
             if (usuarioCriado)
             {
