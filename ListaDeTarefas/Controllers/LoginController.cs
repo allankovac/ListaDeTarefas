@@ -1,6 +1,7 @@
 ﻿using ListaDeTarefas.Business.Interface;
 using ListaDeTarefas.Models;
 using ListaDeTarefas.ViewModel;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ListaDeTarefas.Controllers
@@ -8,59 +9,58 @@ namespace ListaDeTarefas.Controllers
     public class LoginController : Controller
     {
         private readonly IUsuarioBusiness _usuarioBusiness;
-        private readonly ISessaoBusiness _sessaoBusiness;
 
-        public LoginController(IUsuarioBusiness usuarioBusiness, ISessaoBusiness sessaoBusiness)
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
+        public LoginController(IUsuarioBusiness usuarioBusiness, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
             _usuarioBusiness = usuarioBusiness;
-            _sessaoBusiness = sessaoBusiness;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         public IActionResult Index()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("ListarTarefas", "Tarefa");
+            }
             return View();
         }
         [HttpPost]
-        public IActionResult Login(Usuario usuario)
+        public async Task<IActionResult> Login(LoginViewModel loginVM)
         {
-            var usuarioCadastrado = _usuarioBusiness.UsuarioCadastrado(usuario);
-            string idSessao = string.Empty;
-            if (usuarioCadastrado != null)
+            var user = await _userManager.FindByNameAsync(loginVM.UserName);
+            if (user != null)
             {
-                idSessao = _sessaoBusiness.CriarSessao(usuarioCadastrado);
-
-
-                return Json(new { sessao = idSessao, usuario = usuarioCadastrado.Id });
+                var result = await _signInManager.PasswordSignInAsync(user, loginVM.Password, false, false);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ListarTarefas", "Tarefa");
+                }
             }
-
-            return Json(new { sessao = idSessao, usuario = 0 });
+            return View(loginVM);
         }
+
         public IActionResult RegistrarUsuario()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult RegistrarUsuario(Usuario usuario)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RegistrarUsuario(LoginViewModel usuario)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    var user = new IdentityUser { UserName = registroVM.UserName };
-            //    var result = await _userManager.CreateAsync(user, registroVM.Password);
+            var user = new IdentityUser {UserName = usuario.Usuario.Email, Email = usuario.Usuario.Email };
+            var result = await _userManager.CreateAsync(user, usuario.Password);
 
-            //    if (result.Succeeded)
-            //    {
-            //        return RedirectToAction("Login", "Account");
-            //    }
-            //    return View(loginVM);
-            //}
-            var usuarioCriado = _usuarioBusiness.CriarUsuario(usuario);
-            if (usuarioCriado)
+            if (result.Succeeded)
             {
-                return Redirect("/");
-            }
+                var usuarioCriado = _usuarioBusiness.CriarUsuario(usuario.Usuario);
 
-            return View();
+                return RedirectToAction("Index", "Login");
+            }
+            return View(usuario);
         }
     }
 }

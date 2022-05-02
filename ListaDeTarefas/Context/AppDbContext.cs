@@ -14,6 +14,5 @@ namespace ListaDeTarefas.Context
 
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Tarefa> Tarefas { get; set; }
-        public DbSet<Sessao> Sessoes { get; set; }
     }
 }

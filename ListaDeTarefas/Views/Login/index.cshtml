@@ -1,4 +1,4 @@
-﻿@model ListaDeTarefas.Models.Usuario
+﻿@model LoginViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -10,19 +10,19 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <div id="formularioLogin">
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
+        <form asp-action="Login">
+            <div id="formularioLogin">
+                <div class="form-group">
+                    <input asp-for="@Model.UserName" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <input asp-for="@Model.Password" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Entrar</button>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Senha" class="control-label"></label>
-                <input asp-for="Senha" class="form-control" />
-            </div>
-            <div class="form-group">
-                <button type="button" class="btn btn-primary" onclick="AjaxLogin()">Entrar</button>
-            </div>
-        </div>
+        </form>
     </div>
 </div>
 
@@ -33,6 +33,6 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
-    <script src="~/js/Login/script.js"></script>
+    @*<script src="~/js/Login/script.js"></script>*@
 
 }

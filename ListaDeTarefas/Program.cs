@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<AppDbContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<AppDbContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("AvanadeConnection")));
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
@@ -67,7 +67,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Login}/{action=Index}/{id?}");
 
 app.Run();
 
@@ -83,12 +83,10 @@ void RegistrarRepository(IServiceCollection servico)
 {
     servico.AddTransient<IUsuarioRepository, UsuarioRepository>();
     servico.AddTransient<ITarefaRepository, TarefaRepository>();
-    servico.AddTransient<ISessaoRepository, SessaoRepository>();
 }
 
 void RegistrarBusiness(IServiceCollection servico)
 {
     servico.AddTransient<IUsuarioBusiness, UsuarioBusiness>();
     servico.AddTransient<ITarefaBusiness, TarefaBusiness>();
-    servico.AddTransient<ISessaoBusiness, SessaoBusiness>();
 }

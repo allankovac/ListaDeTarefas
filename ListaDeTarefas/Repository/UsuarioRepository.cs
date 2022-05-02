@@ -1,6 +1,7 @@
 ﻿using ListaDeTarefas.Context;
 using ListaDeTarefas.Models;
 using ListaDeTarefas.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace ListaDeTarefas.Repository
 {
@@ -30,7 +31,7 @@ namespace ListaDeTarefas.Repository
         {
             try
             {
-                return _context.Usuarios.FirstOrDefault(u => u.Email == email);
+                return _context.Usuarios.Include(u => u.Tarefas).FirstOrDefault(u => u.Email == email);
             }
             catch (Exception ex)
             {

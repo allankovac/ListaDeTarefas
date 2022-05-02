@@ -17,7 +17,7 @@ namespace ListaDeTarefas.Controllers
 
         public IActionResult Login()
         {
-            return View(new LoginViewModel());
+            return RedirectToAction("index", "Login");
         }
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel loginVM)

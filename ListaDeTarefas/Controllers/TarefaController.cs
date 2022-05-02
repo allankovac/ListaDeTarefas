@@ -1,38 +1,40 @@
 ﻿using ListaDeTarefas.Business.Interface;
 using ListaDeTarefas.Models;
 using ListaDeTarefas.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ListaDeTarefas.Controllers
 {
+    [Authorize]
     public class TarefaController : Controller
     {
         private readonly ITarefaBusiness _tarefaBusiness;
-
         public TarefaController(ITarefaBusiness tarefaBusiness)
         {
             _tarefaBusiness = tarefaBusiness;
         }
-
         [HttpGet]
-        public IActionResult ListarTarefas(int id)
+        public IActionResult ListarTarefas()
         {
-            var tarefa = new TarefaViewModel
+            if (User.Identity.IsAuthenticated)
             {
-                Tarefas = _tarefaBusiness.ListaTarefasDoUsuario(id),
-                Tarefa = new Tarefa
-                {
-                    UsuarioId = id
-                }
-            };
-            return View(tarefa);
+                var tarefas = _tarefaBusiness.ListaTarefasDoUsuario(User.Identity.Name);
+
+                return View(new TarefaViewModel{
+                    Tarefas = tarefas
+                });
+            }
+            
+
+            return RedirectToAction("Index", "Login");
         }
 
         [HttpPost]
         public IActionResult CriarTarefa(Tarefa tarefa)
         {
-            _tarefaBusiness.CriarTarefa(tarefa);
-            return Json(new { status = "sucesso", mensagem = "Tarefa cadastrada com sucesso!"});
+            _tarefaBusiness.CriarTarefa(tarefa, User.Identity.Name);
+            return Json(new { status = "sucesso", mensagem = "Tarefa cadastrada com sucesso!" });
         }
     }
 }

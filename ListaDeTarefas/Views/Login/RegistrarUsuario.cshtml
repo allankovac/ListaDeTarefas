@@ -1,4 +1,4 @@
-﻿@model ListaDeTarefas.Models.Usuario
+﻿@model LoginViewModel
 
 @{
     ViewData["Title"] = "RegistrarUsuario";
@@ -13,24 +13,16 @@
         <form asp-action="RegistrarUsuario">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Nome" class="control-label"></label>
-                <input asp-for="@Model.Nome" class="form-control" />
-                <span asp-validation-for="Nome" class="text-danger"></span>
+                <input asp-for="@Model.Usuario.Nome" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="SobreNome" class="control-label"></label>
-                <input asp-for="@Model.SobreNome" class="form-control" />
-                <span asp-validation-for="SobreNome" class="text-danger"></span>
+                <input asp-for="@Model.Usuario.SobreNome" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="@Model.Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+                <input asp-for="@Model.Usuario.Email" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="Senha" class="control-label"></label>
-                <input asp-for="@Model.Senha" class="form-control" />
-                <span asp-validation-for="Senha" class="text-danger"></span>
+                <input asp-for="@Model.Password" class="form-control" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

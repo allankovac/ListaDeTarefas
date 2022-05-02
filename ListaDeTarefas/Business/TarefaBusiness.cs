@@ -7,14 +7,18 @@ namespace ListaDeTarefas.Business
     public class TarefaBusiness : ITarefaBusiness
     {
         private readonly ITarefaRepository _tarefaRepository;
-
-        public TarefaBusiness(ITarefaRepository tarefaRepository)
+        private readonly IUsuarioRepository _usuarioRepository;
+        
+        public TarefaBusiness(ITarefaRepository tarefaRepository, IUsuarioRepository usuarioRepository)
         {
             _tarefaRepository = tarefaRepository;
+            _usuarioRepository = usuarioRepository;
         }
 
-        public void CriarTarefa(Tarefa tarefa)
+        public void CriarTarefa(Tarefa tarefa, string email)
         {
+            var usuario = _usuarioRepository.RetornarUsuarioPorEmail(email);
+            tarefa.UsuarioId = usuario.Id;
             _tarefaRepository.CriarTarefaNoBd(tarefa);
         }
 
@@ -23,9 +27,10 @@ namespace ListaDeTarefas.Business
         {
             return _tarefaRepository.RetornarTodasAsTarefas();
         }
-        public List<Tarefa> ListaTarefasDoUsuario(int id)
+        public List<Tarefa> ListaTarefasDoUsuario(string email)
         {
-            return _tarefaRepository.RetornarTodasAsTarefasDoUsuario(id);
+
+            return _usuarioRepository.RetornarUsuarioPorEmail(email).Tarefas;
         }
     }
 }
