@@ -29,13 +29,19 @@ namespace ListaDeTarefas.Business
         }
         public List<Tarefa> ListaTarefasDoUsuario(string email)
         {
-            var listaTarefa = _usuarioRepository
-                .RetornarUsuarioPorEmail(email)
-                .Tarefa
-                .Where(t => t.Finalizado == false)
-                .ToList();
+            var tarefa = _usuarioRepository
+                .RetornarUsuarioPorEmail(email)?
+                .Tarefa;
 
-            return listaTarefa;
+            if(tarefa != null) 
+            {
+                return tarefa
+                       .Where(t => t.Finalizado == false)
+                       .ToList();
+            }
+            
+
+            return new List<Tarefa>();
         }
 
         public void FinalizarTarefa(int id)
@@ -45,6 +51,14 @@ namespace ListaDeTarefas.Business
             tarefa.Finalizado = true;
            
             _tarefaRepository.AtualizarTarefaNoBd(tarefa);
+        }
+
+        public void FinalizarTarefaEmMassa(List<int> listaId)
+        {
+            foreach (var id in listaId)
+            {
+                FinalizarTarefa(id);
+            }
         }
     }
 }

@@ -33,15 +33,5 @@ namespace ListaDeTarefas.Business
                 return criadoComSucesso;
             }
         }
-
-        public Usuario UsuarioCadastrado(Usuario usuario)
-        {
-            var usuarioDb = _usuarioRepository.RetornarUsuarioPorEmail(usuario.Email);
-
-            if (usuarioDb.Senha == usuario.Senha)
-                return usuarioDb;
-
-            return null;
-        }
     }
 }

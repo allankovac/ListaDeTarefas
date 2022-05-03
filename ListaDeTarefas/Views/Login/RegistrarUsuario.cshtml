@@ -19,23 +19,25 @@
 
     <div class="row">
         <div class="col-md-4">
-            <div id="formularioLogin">
-                <div class="form-group">
-                    <input asp-for="@Model.Usuario.Nome" class="form-control" />
+            @*<form asp-action="RegistrarUsuario" method="post">*@
+                <div id="formularioLogin">
+                    <div class="form-group">
+                        <input asp-for="@Model.Usuario.Nome" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="@Model.Usuario.SobreNome" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="@Model.Usuario.Email" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="@Model.Password" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <input type="button" onclick="AjaxRegistro()" value="Create" class="btn btn-primary" />
+                    </div>
                 </div>
-                <div class="form-group">
-                    <input asp-for="@Model.Usuario.SobreNome" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <input asp-for="@Model.Usuario.Email" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <input asp-for="@Model.Password" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <input type="button" value="Create" class="btn btn-primary" onclick="AjaxRegistro()" />
-                </div>
-            </div>
+            @*</form>*@
         </div>
     </div>
 
@@ -44,10 +46,6 @@
     </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-
     <script src="~/js/Login/script.js"></script>
 </body>
 </html>

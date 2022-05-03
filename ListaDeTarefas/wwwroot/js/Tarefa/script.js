@@ -12,6 +12,7 @@ function RetornaObjetoDoFormulario() {
 function AjaxRegistrarTarefas() {
     let data = RetornaObjetoDoFormulario();
 
+    console.log(data);
     let request = $.ajax({
         url: "/tarefa/CriarTarefa",
         data: data,
@@ -32,6 +33,31 @@ function AjaxFinalizarTarefa(id) {
         url: "/tarefa/FinalizarTarefa",
         data: {
             id: id
+        },
+        type: "post",
+    });
+
+    request.done(function (response, textStatus, jqXHR) {
+        if (response.status === "sucesso") {
+            alert(response.mensagem);
+
+            window.location.replace(`/tarefa/ListarTarefas/`);
+        }
+    });
+}
+
+function AjaxFinalizarTarefaEmMassa() {
+    var listaIdTarefa = [];
+    $("#table-tarefa input[type='hidden']").each((i, z) => {
+        if ($(`#finalizar-${z.value}`).is(":checked")) {
+            listaIdTarefa.push(z.value)
+        }
+    });
+
+    let request = $.ajax({
+        url: "/tarefa/FinalizarTarefaEmMassa",
+        data: {
+            listaId: listaIdTarefa
         },
         type: "post",
     });

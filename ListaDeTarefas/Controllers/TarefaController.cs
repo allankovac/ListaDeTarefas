@@ -45,5 +45,13 @@ namespace ListaDeTarefas.Controllers
             return Json(new { status = "sucesso", mensagem = "Tarefa finalizada com sucesso!" });
         }
 
+        [HttpPost]
+        public IActionResult FinalizarTarefaEmMassa(List<int> listaId)
+        {
+
+            _tarefaBusiness.FinalizarTarefaEmMassa(listaId);
+            return Json(new { status = "sucesso", mensagem = "Tarefa finalizada com sucesso!" });
+        }
+
     }
 }

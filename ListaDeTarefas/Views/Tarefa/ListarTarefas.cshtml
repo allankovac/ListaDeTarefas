@@ -40,10 +40,18 @@
         </form>
     </div>
 </div>
+<div class="row">
+    <div class="col-md-3">
+        <button type="button" class="btn btn-primary" onclick="AjaxFinalizarTarefaEmMassa()">Finalizar Tarefas Marcada</button>
+    </div>
+</div>
 
 <table class="table">
     <thead>
         <tr>
+            <th>
+                Marcar
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Tarefa.Titulo)
             </th>
@@ -55,10 +63,14 @@
             </th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="table-tarefa">
         @foreach (var item in Model.Tarefas)
         {
             <tr>
+                <td>
+                    <input type="hidden" value="@item.Id">
+                    <input type="checkbox" id="finalizar-@item.Id">
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Titulo)
                 </td>

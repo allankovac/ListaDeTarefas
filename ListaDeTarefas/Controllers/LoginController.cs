@@ -39,7 +39,7 @@ namespace ListaDeTarefas.Controllers
                     return RedirectToAction("ListarTarefas", "Tarefa");
                 }
             }
-            return View(loginVM);
+            return RedirectToAction("index", "Login");
         }
 
         public IActionResult RegistrarUsuario()
@@ -48,22 +48,35 @@ namespace ListaDeTarefas.Controllers
             {
                 return RedirectToAction("ListarTarefas", "Tarefa");
             }
-            return View();
+            return View(new LoginViewModel
+            {
+                Usuario = new Usuario()
+            });
         }
 
         [HttpPost]
-        public async Task<IActionResult> RegistrarUsuario(LoginViewModel usuario)
+        public async Task<IActionResult> RegistrarUsuario(LoginViewModel registroVM)
         {
-            var user = new IdentityUser {UserName = usuario.Usuario.Email, Email = usuario.Usuario.Email };
-            var result = await _userManager.CreateAsync(user, usuario.Password);
+            var user = new IdentityUser {UserName = registroVM.Usuario.Email, Email = registroVM.Usuario.Email };
+            var result = await _userManager.CreateAsync(user, registroVM.Password);
 
             if (result.Succeeded)
             {
-                var usuarioCriado = _usuarioBusiness.CriarUsuario(usuario.Usuario);
+                var usuarioCriado = _usuarioBusiness.CriarUsuario(registroVM.Usuario);
 
                 return RedirectToAction("Index", "Login");
             }
-            return View(usuario);
+            return View(registroVM);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> LogOut()
+        {
+            //HttpContext.Session.Clear();
+            HttpContext.User = null;
+
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Login");
         }
     }
 }
