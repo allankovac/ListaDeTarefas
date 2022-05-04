@@ -9,5 +9,8 @@ namespace ListaDeTarefas.ViewModel
         public string ReturnUrl { get; set; }
 
         public Usuario Usuario { get; set; }
+
+        public string statusRetorno { get; set; }
+        public string mensagemRetorno { get; set; }
     }
 }

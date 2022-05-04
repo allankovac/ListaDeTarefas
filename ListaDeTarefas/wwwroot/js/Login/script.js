@@ -1,32 +1,71 @@
-﻿function RetornaObjetoDoFormulario() {
-    let objeto = {};
+﻿function AjaxLogin() {
+    let email = $('#UserName').val();
+    let senha = $('#Password').val();
 
-    $('#formularioLogin div input').each((i, z) => {
-        objeto[z.name] = z.value;
-    });
+    let valido = false;
 
-    return objeto;
-}
-
-function AjaxLogin() {
-    let data = RetornaObjetoDoFormulario();
-
-    let request = $.ajax({
-        url: "/login/Login",
-        data: data,
-        type: "post",
-    });
-
-    request.done(function (response, textStatus, jqXHR) {
-        if (response.usuario > 0) {
-            let data = sessionStorage.getItem('sessao');
-            if (data == null) {
-                sessionStorage.setItem('sessao', response.sessao);
-
-                window.location.replace(`/tarefa/ListarTarefas/${response.usuario}`);
-            }
+    if (email) {
+        if (validacaoEmail(email)) {
+            valido = true;
+        } else {
+            $('#feedBack').html(`
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Email fora do padrão aceitavel.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>`);
         }
-    });
+    } else {
+        $('#feedBack').html(`
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Email precisa ser preenchido.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>`);
+    }
+
+
+    if (!senha) {
+        $('#feedBack').append(`
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        Senha precisa ser preenchido.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>`);
+        valido = false;
+    }
+
+    if (valido) {
+        let request = $.ajax({
+            url: "/login/Login",
+            data: {
+                "UserName": email,
+                "Password": senha
+            },
+            type: "post",
+        });
+
+        request.done(function (response, textStatus, jqXHR) {
+            let retorno = response.retorno;
+
+            if (retorno.statusRetorno === "erro") {
+                $('#feedBack').html(`
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        ${retorno.mensagemRetorno}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>`);
+            }
+            else if (retorno.statusRetorno === "sucesso") {
+                $('#feedBack').html(`
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        ${retorno.mensagemRetorno}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>`);
+
+                window.location.replace(`/Tarefa/ListarTarefas`);
+            }
+        });
+        //<div class="alert alert-success" role="alert">
+        //    A simple success alert—check it out!
+        //</div>
+    }
 }
 
 
@@ -43,3 +82,5 @@ function AjaxRegistro() {
         window.location.replace(`/tarefa/ListarTarefas/`);
     });
 }
+
+
