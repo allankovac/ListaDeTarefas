@@ -15,37 +15,62 @@
     <link rel="stylesheet" href="~/ListaDeTarefas.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <h1>Cadastro</h1>
 
-    <div class="row">
-        <div class="col-md-4">
-            @*<form asp-action="RegistrarUsuario" method="post">*@
-                <div id="formularioLogin">
-                    <div class="form-group">
-                        <input asp-for="@Model.Usuario.Nome" class="form-control" />
+    <div class="container">
+        <div class="d-flex justify-content-center">
+            <div class="col-md-6" style="margin-top: 10%;">
+                <div class="card">
+                    <div id="feedBack">
                     </div>
-                    <div class="form-group">
-                        <input asp-for="@Model.Usuario.SobreNome" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <input asp-for="@Model.Usuario.Email" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <input asp-for="@Model.Password" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <input type="button" onclick="AjaxRegistro()" value="Create" class="btn btn-primary" />
+                    <div class="card-body">
+                        <div class="justify-content-center">
+                            <div class="col-md-12">
+                                <div class="offset-md-3">
+                                    <h1>Cadastro</h1>
+                                </div>
+                            </div>
+
+
+                            <div class="offset-md-3 col-md-6">
+                                <div id="formularioLogin">
+                                    <div class="form-group">
+                                        <label>Nome</label>
+                                        <input id="Nome" type="text" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Sobre Nome</label>
+                                        <input id="SobreNome" type="text" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <input id="Email" type="text" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Senha</label>
+                                        <input id="Password" type="password" class="form-control" />
+                                    </div>
+                                    <div class="d-flex justify-content-end" style="margin-top: 10px;">
+                                        <div class="form-group">
+                                            <button type="button" class="btn btn-primary" onclick="AjaxRegistro()">Salvar</button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <a asp-controller="Login" asp-action="Login">Voltar</a>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
                     </div>
                 </div>
-            @*</form>*@
+            </div>
         </div>
     </div>
 
-    <div>
-        <a asp-action="Index">Voltar</a>
-    </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js"></script>
     <script src="~/js/Login/script.js"></script>
 </body>
 </html>
