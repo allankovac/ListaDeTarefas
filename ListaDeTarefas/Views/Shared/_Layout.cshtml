@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="utf-8" />
@@ -22,11 +25,19 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Tarefa" asp-action="ListarTarefas">Lista Tarefa</a>
                         </li>
-
-                        <li class="nav-item">
-                            <span class="nav-link text-dark" onclick="Sair()">Sair</span>
-                        </li>
                     </ul>
+                    <div class="nav justify-content-end">
+                        <div class="dropdown">
+                            <button class="btn btn-light dropdown-toggle" type="button" id="MenuUsuario" data-bs-toggle="dropdown" aria-expanded="false">
+                                @User.Identity.Name
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="MenuUsuario">
+                                 <li class="nav-item">
+                                    <span class="nav-link text-dark" style="cursor: pointer;" onclick="Sair()">Sair</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -37,9 +48,9 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted" style="background-color:#fff;">
         <div class="container">
-            &copy; 2022 - ListaDeTarefas - Versão - 0.2
+            &copy; 2022 - ListaDeTarefas - Versão - 0.2.1
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

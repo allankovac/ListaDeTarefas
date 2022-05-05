@@ -16,7 +16,7 @@ namespace ListaDeTarefas.Repository
         public void CriarTarefaNoBd(Tarefa tarefa)
         {
             _context.Tarefas.Add(tarefa);
-            _context.SaveChanges();
+             _context.SaveChanges();
         }
         public void AtualizarTarefaNoBd(Tarefa tarefa)
         {
