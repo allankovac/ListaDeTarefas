@@ -10,13 +10,15 @@
 });
 
 function AjaxRegistrarTarefas() {
+    var obj = {
+        'Tarefa.Titulo': $("#Titulo").val(),
+        'Tarefa.Descricao': $("#Descricao").val(),
+        'Data': $("#DtTarefaFim").val()
+    };
+
     let request = $.ajax({
         url: "/tarefa/CriarTarefa",
-        data: {
-            'Titulo': $("#Titulo").val(),
-            'DtTarefaFim': $("#DtTarefaFim").val(),
-            'Descricao': $("#Descricao").val()
-        },
+        data: obj,
         type: "post",
     });
 

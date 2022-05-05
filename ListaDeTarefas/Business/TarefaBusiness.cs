@@ -1,6 +1,7 @@
 ﻿using ListaDeTarefas.Business.Interface;
 using ListaDeTarefas.Models;
 using ListaDeTarefas.Repository.Interfaces;
+using System.Globalization;
 
 namespace ListaDeTarefas.Business
 {
@@ -37,6 +38,7 @@ namespace ListaDeTarefas.Business
             {
                 return tarefa
                        .Where(t => t.Finalizado == false)
+                       .OrderBy(t => t.DtTarefaFim)
                        .ToList();
             }
             
@@ -59,6 +61,14 @@ namespace ListaDeTarefas.Business
             {
                 FinalizarTarefa(id);
             }
+        }
+
+        public DateTime TryParseDateStringToDateTime(string dataMesAno)
+        {
+            if (DateTime.TryParseExact(dataMesAno, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date))
+                return date;
+
+            return DateTime.Today;
         }
     }
 }

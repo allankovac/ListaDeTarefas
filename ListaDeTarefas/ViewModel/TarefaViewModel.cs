@@ -7,5 +7,7 @@ namespace ListaDeTarefas.ViewModel
         public Tarefa Tarefa { get; set; }
 
         public List<Tarefa> Tarefas { get; set; }
+
+        public string Data { get; set; }
     }
 }

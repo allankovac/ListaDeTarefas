@@ -12,5 +12,6 @@ namespace ListaDeTarefas.Business.Interface
         void FinalizarTarefa(int id);
 
         void FinalizarTarefaEmMassa(List<int> listaId);
+        DateTime TryParseDateStringToDateTime(string dataMesAno);
     }
 }

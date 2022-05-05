@@ -77,7 +77,7 @@ function AjaxRegistro() {
         "Password": $('#Password').val(),
         "valido": false
     };
-    console.log(obj);
+
     limparFeedBack();
     obj = validarFormularioCadastro(obj)
 
