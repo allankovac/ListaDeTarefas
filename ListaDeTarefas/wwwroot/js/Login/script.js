@@ -70,17 +70,92 @@
 
 
 function AjaxRegistro() {
-    let data = RetornaObjetoDoFormulario();
-    console.log(data);
-    let request = $.ajax({
-        url: "/login/RegistrarUsuario",
-        data: data,
-        type: "post",
-    });
+    let obj = {
+        "Usuario.Nome": $('#Nome').val(),
+        "Usuario.SobreNome": $('#SobreNome').val(),
+        "Usuario.Email": $('#Email').val(),
+        "Password": $('#Password').val(),
+        "valido": false
+    };
+    console.log(obj);
+    limparFeedBack();
+    obj = validarFormularioCadastro(obj)
 
-    request.done(function (response, textStatus, jqXHR) {
-        window.location.replace(`/tarefa/ListarTarefas/`);
-    });
+    if (obj.valido) {
+        let request = $.ajax({
+            url: "/login/RegistrarUsuario",
+            data: obj,
+            type: "post",
+        });
+
+        request.done(function (response, textStatus, jqXHR) {
+            let retorno = response.retorno;
+
+            if (retorno.statusRetorno === "erro") {
+                $('#feedBack').html(`
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        ${retorno.mensagemRetorno}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>`);
+            }
+            else if (retorno.statusRetorno === "sucesso") {
+                $('#feedBack').html(`
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        ${retorno.mensagemRetorno}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>`);
+
+                window.location.replace(`/Login/Login`);
+            }
+        });
+    }
 }
+function limparFeedBack() {
+    $('#feedBack').html('');
+}
+function validarFormularioCadastro(obj) {
+    if (obj["Usuario.Email"]) {
+        if (validacaoEmail(obj["Usuario.Email"])) {
+            obj.valido = true;
+        } else {
+            $('#feedBack').append(`
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Email fora do padrão aceitavel.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>`);
+        }
+    } else {
+        $('#feedBack').append(`
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Email precisa ser preenchido.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>`);
+    }
 
+    if (!obj.Password) {
+        obj.valido = false;
+        $('#feedBack').append(`
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Senha precisa ser preenchido.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>`);
+    }
+    if (!obj["Usuario.Nome"]) {
+        obj.valido = false;
+        $('#feedBack').append(`
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Nome precisa ser preenchido.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>`);
+    }
+    if (!obj["Usuario.SobreNome"]) {
+        obj.valido = false;
+        $('#feedBack').append(`
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Sobre Nome precisa ser preenchido.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>`);
+    }
 
+    return obj;
+}

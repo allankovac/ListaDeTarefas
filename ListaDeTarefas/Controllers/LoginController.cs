@@ -74,16 +74,34 @@ namespace ListaDeTarefas.Controllers
         [HttpPost]
         public async Task<IActionResult> RegistrarUsuario(LoginViewModel registroVM)
         {
-            var user = new IdentityUser { UserName = registroVM.Usuario.Email, Email = registroVM.Usuario.Email };
-            var result = await _userManager.CreateAsync(user, registroVM.Password);
-
-            if (result.Succeeded)
+            _usuarioBusiness.validarDadosRegistro(registroVM);
+            if (registroVM.statusRetorno == "sucesso")
             {
-                var usuarioCriado = _usuarioBusiness.CriarUsuario(registroVM.Usuario);
+                var user = new IdentityUser { UserName = registroVM.Usuario.Email, Email = registroVM.Usuario.Email };
+                var result = await _userManager.CreateAsync(user, registroVM.Password);
 
-                return RedirectToAction("Login", "Login");
+                if (result.Succeeded)
+                {
+                    var usuarioCriado = _usuarioBusiness.CriarUsuario(registroVM.Usuario);
+
+                    if (usuarioCriado)
+                    {
+                        registroVM.mensagemRetorno = "Usuário criado com sucesso.";
+                    }
+                    else
+                    {
+                        registroVM.statusRetorno = "erro";
+                        registroVM.mensagemRetorno = "Erro na criação do usuário. Tente novamente mais tarde!";
+                    }
+                    
+                }
+                else
+                {
+                    registroVM.statusRetorno = "erro";
+                    registroVM.mensagemRetorno = "Email já está em uso";
+                }
             }
-            return View(registroVM);
+            return Json(new { retorno = registroVM });
         }
 
         [HttpPost]
@@ -95,6 +113,7 @@ namespace ListaDeTarefas.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Login", "Login");
         }
+
 
     }
 }
