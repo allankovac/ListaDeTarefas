@@ -1,0 +1,97 @@
+﻿@model TarefaViewModel
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card text-white bg-success mb-6">
+            <div class="card-header">
+                <h4 class="card-title">Tarefas Finalizadas</h4>
+            </div>
+            <div class="card-body">
+                @*<h5 class="card-text">Antes do Tempo: 0 | Depois do Tempo: 0 | Total: 0</h5>*@
+                <div class="row">
+                    <div class="col-md-4">
+                        <h4>Adiantado: @Model.TotalFinalizadoAntes</h4>
+                    </div>
+                    <div class="col-md-4">
+                        <h4>Atrasado: @Model.TotalFinalizadoDepois</h4>
+                    </div>
+                    <div class="col-md-4">
+                        <h4>Total: @Model.TotalFinalizadoTotal</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card text-white bg-primary mb-6">
+            <div class="card-header">
+                <h4 class="card-title">Tarefas Em aberto</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h4>finalizar: @Model.TotalEmAbertoAntes</h4>
+                    </div>
+                    <div class="col-md-4">
+                        <h4>Atrasado: @Model.TotalEmAbertoDepois</h4>
+                    </div>
+                    <div class="col-md-4">
+                        <h4>Total: @Model.TotalEmAbertoTotal</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="margin-top:15px;">
+    <div class="card-header">
+        <h4 class="card-title">Tarefas Finalizadas</h4>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Id
+                    </th>
+                    <th>
+                        Tarefa
+                    </th>
+                    <th>
+                        Descrição
+                    </th>
+                    <th>
+                        Data prevista
+                    </th>
+                    <th>
+                        Data termino
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="table-tarefa">
+                @foreach (var item in Model.TarefasFinalizadas)
+                {
+                    <tr>
+                        <td>
+                            @item.Id
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Titulo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Descricao)
+                        </td>
+                        <td>
+                            @item.DtTarefaFim.ToString("dd/MM/yyyy")
+                        </td>
+                        <td>
+                            @item.DtEncerramento.ToString("dd/MM/yyyy")
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

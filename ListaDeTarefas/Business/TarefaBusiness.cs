@@ -1,6 +1,7 @@
 ﻿using ListaDeTarefas.Business.Interface;
 using ListaDeTarefas.Models;
 using ListaDeTarefas.Repository.Interfaces;
+using ListaDeTarefas.ViewModel;
 using System.Globalization;
 
 namespace ListaDeTarefas.Business
@@ -36,7 +37,7 @@ namespace ListaDeTarefas.Business
             {
                 throw new Exception("Erro inesperado.");
             }
-            
+
         }
 
 
@@ -60,6 +61,45 @@ namespace ListaDeTarefas.Business
 
 
             return new List<Tarefa>();
+        }
+
+        public TarefaViewModel ListaTarefasDashBoardDoUsuario(string email)
+        {
+            var tarefa = _usuarioRepository
+                .RetornarUsuarioPorEmail(email)?
+                .Tarefa;
+
+            var tarefaVM = new TarefaViewModel
+            {
+                TarefasFinalizadas = tarefa
+                                    .Where(t => t.Finalizado == true)
+                                   .OrderBy(t => t.DtTarefaFim)
+                                   .ToList(),
+                TarefasNaoFinalizadas = tarefa
+                                    .Where(t => t.Finalizado == false)
+                                   .OrderBy(t => t.DtTarefaFim)
+                                   .ToList()
+            };
+            CountFinalizados(tarefaVM);
+            CountEmAberto(tarefaVM);
+
+            return tarefaVM;
+
+        }
+
+        private void CountFinalizados(TarefaViewModel tarefa)
+        {
+            tarefa.TotalFinalizadoTotal = tarefa.TarefasFinalizadas.Count();
+            tarefa.TotalFinalizadoAntes = tarefa.TarefasFinalizadas.Count(t => t.DtEncerramento <= t.DtTarefaFim);
+            tarefa.TotalFinalizadoDepois = tarefa.TarefasFinalizadas.Count(t => t.DtEncerramento > t.DtTarefaFim);
+        }
+
+        private void CountEmAberto(TarefaViewModel tarefa)
+        {
+            var data = DateTime.Now.Date;
+            tarefa.TotalEmAbertoTotal = tarefa.TarefasNaoFinalizadas.Count();
+            tarefa.TotalEmAbertoAntes = tarefa.TarefasNaoFinalizadas.Count(t => data <= t.DtTarefaFim);
+            tarefa.TotalEmAbertoDepois = tarefa.TarefasNaoFinalizadas.Count(t => data > t.DtTarefaFim);
         }
 
         public void FinalizarTarefa(int id)

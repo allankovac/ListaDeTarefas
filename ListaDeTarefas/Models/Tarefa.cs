@@ -6,8 +6,7 @@ namespace ListaDeTarefas.Models
     {
         public int Id { get; set; }
         public string Titulo { get; set; }
-        [AllowNull]
-        public string Descricao { get; set; }
+        public string? Descricao { get; set; }
         public DateTime DtTarefaFim { get; set; }
         public DateTime DtEncerramento { get; set; }
         public bool Finalizado { get; set; }

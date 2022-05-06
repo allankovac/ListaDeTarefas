@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ListaDeTarefas</title>
+    <title>ListaDeTarefas</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ListaDeTarefas.styles.css" asp-append-version="true" />
@@ -15,7 +15,9 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <div class="navbar-brand">ListaDeTarefas</div>
+                <div class="navbar-brand">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Tarefa" asp-action="ListarTarefasDashBoard">Lista De Tarefas</a>
+                </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -50,7 +52,7 @@
 
     <footer class="border-top footer text-muted" style="background-color:#fff;">
         <div class="container">
-            &copy; 2022 - ListaDeTarefas - Versão - 0.2.1
+            &copy; 2022 - ListaDeTarefas - Versão - 0.2.2
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

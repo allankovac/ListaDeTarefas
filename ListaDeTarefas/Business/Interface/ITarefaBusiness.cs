@@ -1,4 +1,5 @@
 ﻿using ListaDeTarefas.Models;
+using ListaDeTarefas.ViewModel;
 
 namespace ListaDeTarefas.Business.Interface
 {
@@ -8,6 +9,7 @@ namespace ListaDeTarefas.Business.Interface
         List<Tarefa> ListaTarefa();
 
         List<Tarefa> ListaTarefasDoUsuario(string id);
+        TarefaViewModel ListaTarefasDashBoardDoUsuario(string id);
 
         void FinalizarTarefa(int id);
 
