@@ -1,9 +1,12 @@
-﻿namespace ListaDeTarefas.Models
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace ListaDeTarefas.Models
 {
     public class Tarefa
     {
         public int Id { get; set; }
         public string Titulo { get; set; }
+        [AllowNull]
         public string Descricao { get; set; }
         public DateTime DtTarefaFim { get; set; }
         public DateTime DtEncerramento { get; set; }
