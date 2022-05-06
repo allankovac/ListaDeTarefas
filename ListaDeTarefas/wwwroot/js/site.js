@@ -15,6 +15,9 @@ function Sair() {
     });
 }
 
+function limparFeedBack() {
+    $('#feedBack').html('');
+}
 
 function validacaoEmail(email) {
     var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;

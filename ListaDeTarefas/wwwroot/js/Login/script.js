@@ -110,9 +110,7 @@ function AjaxRegistro() {
         });
     }
 }
-function limparFeedBack() {
-    $('#feedBack').html('');
-}
+
 function validarFormularioCadastro(obj) {
     if (obj["Usuario.Email"]) {
         if (validacaoEmail(obj["Usuario.Email"])) {

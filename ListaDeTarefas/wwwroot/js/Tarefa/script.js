@@ -16,19 +16,34 @@ function AjaxRegistrarTarefas() {
         'Data': $("#DtTarefaFim").val()
     };
 
-    let request = $.ajax({
-        url: "/tarefa/CriarTarefa",
-        data: obj,
-        type: "post",
-    });
+    limparFeedBack();
 
-    request.done(function (response, textStatus, jqXHR) {
-        if (response.status === "sucesso") {
-            alert(response.mensagem);
+    if (ValidarFormularioDeCriacaoDeTarefa(obj)) {
+        let request = $.ajax({
+            url: "/tarefa/CriarTarefa",
+            data: obj,
+            type: "post",
+        });
 
-            window.location.replace(`/tarefa/ListarTarefas/`);
-        }
-    });
+        request.done(function (response, textStatus, jqXHR) {
+            if (response.status === "sucesso") {
+                $('#feedBack').html(`
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        ${response.mensagem}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>`);
+                window.location.replace(`/tarefa/ListarTarefas/`);
+            } else {
+                $('#feedBack').append(`
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        ${response.mensagem}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>`);
+            }
+
+        });
+    }
+    
 }
 
 function AjaxFinalizarTarefa(id) {
@@ -72,4 +87,27 @@ function AjaxFinalizarTarefaEmMassa() {
             window.location.replace(`/tarefa/ListarTarefas/`);
         }
     });
+}
+
+
+function ValidarFormularioDeCriacaoDeTarefa(obj) {
+    if (!obj['Tarefa.Titulo']) {
+        $('#feedBack').append(`
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        Campo obrigatório não preenchido.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>`);
+        return false;
+    }
+    else if (!obj.Data) {
+        $('#feedBack').append(`
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        Campo obrigatório não preenchido.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>`);
+
+        return false;
+    }
+
+    return true; 
 }

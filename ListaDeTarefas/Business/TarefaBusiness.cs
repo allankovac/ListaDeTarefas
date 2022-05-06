@@ -9,7 +9,7 @@ namespace ListaDeTarefas.Business
     {
         private readonly ITarefaRepository _tarefaRepository;
         private readonly IUsuarioRepository _usuarioRepository;
-        
+
         public TarefaBusiness(ITarefaRepository tarefaRepository, IUsuarioRepository usuarioRepository)
         {
             _tarefaRepository = tarefaRepository;
@@ -18,9 +18,25 @@ namespace ListaDeTarefas.Business
 
         public void CriarTarefa(Tarefa tarefa, string email)
         {
+            if (tarefa.Titulo == null || tarefa.DtTarefaFim == null)
+            {
+                throw new Exception("Campo obrigatório não preenchido");
+            }
+            if (email == null)
+            {
+                throw new Exception("Erro inesperado.");
+            }
             var usuario = _usuarioRepository.RetornarUsuarioPorEmail(email);
-            tarefa.UsuarioId = usuario.Id;
-            _tarefaRepository.CriarTarefaNoBd(tarefa);
+            if (usuario != null)
+            {
+                tarefa.UsuarioId = usuario.Id;
+                _tarefaRepository.CriarTarefaNoBd(tarefa);
+            }
+            else
+            {
+                throw new Exception("Erro inesperado.");
+            }
+            
         }
 
 
@@ -34,14 +50,14 @@ namespace ListaDeTarefas.Business
                 .RetornarUsuarioPorEmail(email)?
                 .Tarefa;
 
-            if(tarefa != null) 
+            if (tarefa != null)
             {
                 return tarefa
                        .Where(t => t.Finalizado == false)
                        .OrderBy(t => t.DtTarefaFim)
                        .ToList();
             }
-            
+
 
             return new List<Tarefa>();
         }
@@ -51,7 +67,7 @@ namespace ListaDeTarefas.Business
             var tarefa = _tarefaRepository.PesquisarTarefaPeloId(id);
             tarefa.DtEncerramento = DateTime.Now;
             tarefa.Finalizado = true;
-           
+
             _tarefaRepository.AtualizarTarefaNoBd(tarefa);
         }
 

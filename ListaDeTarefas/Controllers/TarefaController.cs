@@ -33,10 +33,19 @@ namespace ListaDeTarefas.Controllers
         [HttpPost]
         public IActionResult CriarTarefa(TarefaViewModel TarefaVM)
         {
-            var tarefa = TarefaVM.Tarefa;
-            tarefa.DtTarefaFim = _tarefaBusiness.TryParseDateStringToDateTime(TarefaVM.Data);
-            _tarefaBusiness.CriarTarefa(TarefaVM.Tarefa, User.Identity.Name);
-            return Json(new { status = "sucesso", mensagem = "Tarefa cadastrada com sucesso!" });
+            try
+            {
+                var tarefa = TarefaVM.Tarefa;
+                tarefa.DtTarefaFim = _tarefaBusiness.TryParseDateStringToDateTime(TarefaVM.Data);
+                _tarefaBusiness.CriarTarefa(TarefaVM.Tarefa, User.Identity.Name);
+                return Json(new { status = "sucesso", mensagem = "Tarefa cadastrada com sucesso!" });
+            } 
+            catch (Exception ex)
+            {
+                return Json(new { status = "erro", mensagem = ex.Message });
+            }
+            
+            
         }
 
         [HttpPost]
