@@ -90,8 +90,8 @@ namespace ListaDeTarefas.Business
         private void CountFinalizados(TarefaViewModel tarefa)
         {
             tarefa.TotalFinalizadoTotal = tarefa.TarefasFinalizadas.Count();
-            tarefa.TotalFinalizadoAntes = tarefa.TarefasFinalizadas.Count(t => t.DtEncerramento <= t.DtTarefaFim);
-            tarefa.TotalFinalizadoDepois = tarefa.TarefasFinalizadas.Count(t => t.DtEncerramento > t.DtTarefaFim);
+            tarefa.TotalFinalizadoAntes = tarefa.TarefasFinalizadas.Count(t => t.DtEncerramento.Date < t.DtTarefaFim.Date);
+            tarefa.TotalFinalizadoDepois = tarefa.TarefasFinalizadas.Count(t => t.DtEncerramento.Date > t.DtTarefaFim.Date);
         }
 
         private void CountEmAberto(TarefaViewModel tarefa)
