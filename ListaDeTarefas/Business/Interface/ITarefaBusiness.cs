@@ -12,7 +12,7 @@ namespace ListaDeTarefas.Business.Interface
         TarefaViewModel ListaTarefasDashBoardDoUsuario(string id);
 
         void FinalizarTarefa(int id);
-
+        void RestaurarTarefa(int id);
         void FinalizarTarefaEmMassa(List<int> listaId);
         DateTime TryParseDateStringToDateTime(string dataMesAno);
     }

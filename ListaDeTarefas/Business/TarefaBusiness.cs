@@ -111,6 +111,14 @@ namespace ListaDeTarefas.Business
             _tarefaRepository.AtualizarTarefaNoBd(tarefa);
         }
 
+        public void RestaurarTarefa(int id)
+        {
+            var tarefa = _tarefaRepository.PesquisarTarefaPeloId(id);
+            tarefa.Finalizado = false;
+
+            _tarefaRepository.AtualizarTarefaNoBd(tarefa);
+        }
+
         public void FinalizarTarefaEmMassa(List<int> listaId)
         {
             foreach (var id in listaId)

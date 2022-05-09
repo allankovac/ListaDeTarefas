@@ -24,8 +24,18 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Tarefa" asp-action="ListarTarefas">Lista Tarefa</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Tarefa
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Tarefa" asp-action="ListarTarefasDashBoard">Tarefefas finalizadas</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Tarefa" asp-action="ListarTarefas">Lista Tarefas abertas</a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                     <div class="nav justify-content-end">
@@ -34,7 +44,7 @@
                                 @User.Identity.Name
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="MenuUsuario">
-                                 <li class="nav-item">
+                                <li class="nav-item">
                                     <span class="nav-link text-dark" style="cursor: pointer;" onclick="Sair()">Sair</span>
                                 </li>
                             </ul>
@@ -52,7 +62,7 @@
 
     <footer class="border-top footer text-muted" style="background-color:#fff;">
         <div class="container">
-            &copy; 2022 - ListaDeTarefas - Versão - 0.2.2
+            &copy; 2022 - ListaDeTarefas - Versão - 0.3
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

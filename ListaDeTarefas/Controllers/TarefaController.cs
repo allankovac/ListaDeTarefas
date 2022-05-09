@@ -72,6 +72,14 @@ namespace ListaDeTarefas.Controllers
         }
 
         [HttpPost]
+        public IActionResult RestaurarTarefa(int id)
+        {
+
+            _tarefaBusiness.RestaurarTarefa(id);
+            return Json(new { status = "sucesso", mensagem = "Tarefa restaurada com sucesso!" });
+        }
+
+        [HttpPost]
         public IActionResult FinalizarTarefaEmMassa(List<int> listaId)
         {
 

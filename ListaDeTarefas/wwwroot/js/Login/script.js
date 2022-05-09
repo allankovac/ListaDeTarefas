@@ -59,7 +59,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>`);
 
-                window.location.replace(`/Tarefa/ListarTarefas`);
+                window.location.replace(`/Tarefa/ListarTarefasDashBoard`);
             }
         });
         //<div class="alert alert-success" role="alert">
