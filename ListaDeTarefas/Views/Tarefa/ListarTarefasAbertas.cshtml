@@ -1,0 +1,178 @@
+﻿@model TarefaViewModel
+
+<div class="row card-superior">
+    <div class="col-md-6">
+        <div class="card text-white bg-success mb-6">
+            <div class="card-header">
+                <h4 class="card-title">Tarefas Finalizadas</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h4>Adiantado: @Model.TotalFinalizadoAntes</h4>
+                    </div>
+                    <div class="col-md-4">
+                        <h4>Atrasado: @Model.TotalFinalizadoDepois</h4>
+                    </div>
+                    <div class="col-md-4">
+                        <h4>Total: @Model.TotalFinalizadoTotal</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card text-white bg-primary mb-6">
+            <div class="card-header">
+                <h4 class="card-title">Tarefas Em aberto</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h4>finalizar: @Model.TotalEmAbertoAntes</h4>
+                    </div>
+                    <div class="col-md-4">
+                        <h4>Atrasado: @Model.TotalEmAbertoDepois</h4>
+                    </div>
+                    <div class="col-md-4">
+                        <h4>Total: @Model.TotalEmAbertoTotal</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card text-center" style="margin-top:15px;">
+    <div class="card-header">
+        <h4 class="card-title">Tarefas Abertas</h4>
+        @*<ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a id="Nao-Finalizadas" class="nav-link" onclick="showTarefas('Nao-Finalizadas')" href="#">Em Aberto</a>
+            </li>
+
+            <li class="nav-item">
+                <a id="Finalizadas" class="nav-link" onclick="showTarefas('Finalizadas')" aria-current="true" href="#">Finalizadas</a>
+            </li>
+        </ul>*@
+    </div>
+    <div class="card-body">
+        <div id="Tarefas-Abertas">
+            <div class="card-body">
+                
+                        <div class="row border-bottom" style="margin-top:10px;">
+                            <div class="col-1">
+                                Id
+                            </div>
+                            <div class="col-2">
+                                Tarefa
+                            </div>
+                            <div class="col-3">
+                                Descrição
+                            </div>
+                            <div class="col-2">
+                                Data prevista
+                            </div>
+                            <div class="col-2">
+                                Data término
+                            </div>
+                            <div class="col-2"></div>
+                        </div>
+                    
+                    
+                        @foreach (var item in Model.TarefasFinalizadas)
+                        {
+                            <div class="row border-bottom" style="margin-top:10px;">
+                                <div class="col-1">
+                                    @item.Id
+                                </div>
+                                <div class="col-2">
+                                    @Html.DisplayFor(modelItem => item.Titulo)
+                                </div>
+                                <div class="col-3">
+                                    @Html.DisplayFor(modelItem => item.Descricao)
+                                </div>
+                                <div class="col-2">
+                                    @item.DtTarefaFim.ToString("dd/MM/yyyy")
+                                </div>
+                                <div class="col-2">
+                                    @item.DtEncerramento.ToString("dd/MM/yyyy")
+                                </div>
+                                <div class="col-2">
+                                    <button type="button" class="btn btn-primary" onclick="AjaxRestaurarTarefa(@item.Id)">
+                                        Restaurar tarefa
+                                    </button>
+                                </div>
+                            </div>
+                        }
+                    
+                
+            </div>
+        </div>
+        @*<div id="Tarefas-Nao-Finalizadas">
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                Id
+                            </th>
+                            <th>
+                                Tarefa
+                            </th>
+                            <th>
+                                Descrição
+                            </th>
+                            <th>
+                                Data prevista
+                            </th>
+                            <th>
+                                Data término
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-tarefa">
+                        @foreach (var item in Model.TarefasNaoFinalizadas)
+                        {
+                            <tr>
+                                <td>
+                                    @item.Id
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Titulo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Descricao)
+                                </td>
+                                <td>
+                                    @item.DtTarefaFim.ToString("dd/MM/yyyy")
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>*@
+    </div>
+</div>
+
+
+<style>
+    .tarefas {
+        margin-top: 10px;
+    }
+    .card-superior{
+        shadow-box: 0 0 2px #000;
+    }
+</style>
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+<script src="~/js/Tarefa/ListarTarefasFinalizadas.js"></script>
+
+}

@@ -23,7 +23,7 @@ namespace ListaDeTarefas.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("ListarTarefas", "Tarefa");
+                return RedirectToAction("AdicionarTarefas", "Tarefa");
             }
             return View();
         }
@@ -63,7 +63,7 @@ namespace ListaDeTarefas.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("ListarTarefas", "Tarefa");
+                return RedirectToAction("AdicionarTarefas", "Tarefa");
             }
             return View(new LoginViewModel
             {

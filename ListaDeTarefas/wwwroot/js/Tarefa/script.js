@@ -32,7 +32,7 @@ function AjaxRegistrarTarefas() {
                         ${response.mensagem}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>`);
-                window.location.replace(`/tarefa/ListarTarefas/`);
+                window.location.replace(`/tarefa/AdicionarTarefas/`);
             } else {
                 $('#feedBack').append(`
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -59,7 +59,7 @@ function AjaxFinalizarTarefa(id) {
         if (response.status === "sucesso") {
             alert(response.mensagem);
 
-            window.location.replace(`/tarefa/ListarTarefas/`);
+            window.location.replace(`/tarefa/AdicionarTarefas/`);
         }
     });
 }
@@ -84,7 +84,7 @@ function AjaxFinalizarTarefaEmMassa() {
         if (response.status === "sucesso") {
             alert(response.mensagem);
 
-            window.location.replace(`/tarefa/ListarTarefas/`);
+            window.location.replace(`/tarefa/AdicionarTarefas/`);
         }
     });
 }

@@ -16,7 +16,7 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <div class="navbar-brand">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Tarefa" asp-action="ListarTarefasDashBoard">Lista De Tarefas</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Tarefa" asp-action="ListarTarefasFinalizadas">Lista De Tarefas</a>
                 </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -30,10 +30,13 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Tarefa" asp-action="ListarTarefasDashBoard">Tarefefas finalizadas</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Tarefa" asp-action="ListarTarefasAbertas">Tarefas Abertas</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Tarefa" asp-action="ListarTarefas">Lista Tarefas abertas</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Tarefa" asp-action="ListarTarefasFinalizadas">Tarefas Finalizadas</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Tarefa" asp-action="AdicionarTarefas">Adicionar/Remover Tarefas</a>
                                 </li>
                             </ul>
                         </li>
@@ -65,9 +68,22 @@
             &copy; 2022 - ListaDeTarefas - Versão - 0.3
         </div>
     </footer>
+
+    <style>
+        .dropdown-menu{
+            min-width: 13em !important;
+        }
+        
+        button.btn-tela {
+          background-color: #43bed7;
+          color: #fff;
+        }
+    </style>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>

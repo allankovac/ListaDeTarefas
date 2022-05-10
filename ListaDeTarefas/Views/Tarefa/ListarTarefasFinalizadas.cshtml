@@ -1,6 +1,6 @@
 ﻿@model TarefaViewModel
 
-<div class="row">
+<div class="row card-superior">
     <div class="col-md-6">
         <div class="card text-white bg-success mb-6">
             <div class="card-header">
@@ -75,7 +75,7 @@
                                 Data prevista
                             </div>
                             <div class="col-2">
-                                Data termino
+                                Data término
                             </div>
                             <div class="col-2"></div>
                         </div>
@@ -128,7 +128,7 @@
                                 Data prevista
                             </th>
                             <th>
-                                Data termino
+                                Data término
                             </th>
                         </tr>
                     </thead>
@@ -158,10 +158,21 @@
         </div>*@
     </div>
 </div>
+
+
+<style>
+    .tarefas {
+        margin-top: 10px;
+    }
+    .card-superior{
+        shadow-box: 0 0 2px #000;
+    }
+</style>
+
 @section Scripts {
     @{
     await Html.RenderPartialAsync("_ValidationScriptsPartial");
 }
-<script src="~/js/Tarefa/ListarTarefasDashBoard.js"></script>
+<script src="~/js/Tarefa/ListarTarefasFinalizadas.js"></script>
 
 }
