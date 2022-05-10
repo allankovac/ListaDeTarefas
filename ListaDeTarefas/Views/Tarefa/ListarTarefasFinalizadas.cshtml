@@ -24,22 +24,24 @@
 
     <div class="col-md-6">
         <div class="card text-white bg-primary mb-6">
-            <div class="card-header">
-                <h4 class="card-title">Tarefas Em aberto</h4>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-4">
-                        <h4>finalizar: @Model.TotalEmAbertoAntes</h4>
-                    </div>
-                    <div class="col-md-4">
-                        <h4>Atrasado: @Model.TotalEmAbertoDepois</h4>
-                    </div>
-                    <div class="col-md-4">
-                        <h4>Total: @Model.TotalEmAbertoTotal</h4>
+            <a href="/Tarefa/ListarTarefasAbertas" class="nav-link text-white">
+                <div class="card-header">
+                    <h4 class="card-title">Tarefas Em aberto</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h4>finalizar: @Model.TotalEmAbertoAntes</h4>
+                        </div>
+                        <div class="col-md-4">
+                            <h4>Atrasado: @Model.TotalEmAbertoDepois</h4>
+                        </div>
+                        <div class="col-md-4">
+                            <h4>Total: @Model.TotalEmAbertoTotal</h4>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
 </div>

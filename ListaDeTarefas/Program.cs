@@ -9,9 +9,9 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 var connection = string.Empty;
-//connection = "DefaultConnection";
+connection = "DefaultConnection";
 //connection = "AvanadeConnection";
-connection = "ProdConnection";
+//connection = "ProdConnection";
 builder.Services.AddDbContext<AppDbContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString(connection)));
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();

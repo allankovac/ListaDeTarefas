@@ -63,7 +63,16 @@ function AjaxFinalizarTarefa(id) {
         }
     });
 }
-
+function ativarTodos() {
+    $("input[type='hidden']").each((i, z) => {
+        if ($('#finalizar-todos').is(":checked")) {
+            $(`#finalizar-${z.value}`).prop('checked', true);
+        }
+        else {
+            $(`#finalizar-${z.value}`).prop('checked', false);
+        }
+    });
+}
 function AjaxFinalizarTarefaEmMassa() {
     var listaIdTarefa = [];
     $("input[type='hidden']").each((i, z) => {

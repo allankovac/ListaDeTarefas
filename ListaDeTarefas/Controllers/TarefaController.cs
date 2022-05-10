@@ -45,6 +45,20 @@ namespace ListaDeTarefas.Controllers
             return RedirectToAction("Index", "Login");
         }
 
+        [HttpGet]
+        public IActionResult ListarTarefasAbertas()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var tarefas = _tarefaBusiness.ListaTarefasDashBoardDoUsuario(User.Identity.Name);
+
+                return View(tarefas);
+            }
+
+
+            return RedirectToAction("Index", "Login");
+        }
+
         [HttpPost]
         public IActionResult CriarTarefa(TarefaViewModel TarefaVM)
         {
