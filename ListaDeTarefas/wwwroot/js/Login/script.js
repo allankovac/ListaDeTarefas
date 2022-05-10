@@ -59,7 +59,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>`);
 
-                window.location.replace(`/Tarefa/ListarTarefasDashBoard`);
+                window.location.replace(`/Tarefa/ListarTarefasFinalizadas`);
             }
         });
         //<div class="alert alert-success" role="alert">

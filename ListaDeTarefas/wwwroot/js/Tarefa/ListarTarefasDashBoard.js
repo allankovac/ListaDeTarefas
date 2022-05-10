@@ -30,7 +30,7 @@ function AjaxRestaurarTarefa(id) {
         if (response.status === "sucesso") {
             alert(response.mensagem);
 
-            window.location.replace(`/tarefa/ListarTarefasDashBoard/`);
+            window.location.replace(`/tarefa/ListarTarefasFinalizadas/`);
         }
     });
 }

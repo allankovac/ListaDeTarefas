@@ -28,7 +28,7 @@ namespace ListaDeTarefas.Controllers
                 var result = await _signInManager.PasswordSignInAsync(user, loginVM.Password, false, false);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("ListarTarefas", "Tarefa");
+                    return RedirectToAction("AdicionarTarefas", "Tarefa");
                 }
             }
             return View(loginVM);

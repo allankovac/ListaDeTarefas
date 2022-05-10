@@ -15,7 +15,7 @@ namespace ListaDeTarefas.Controllers
             _tarefaBusiness = tarefaBusiness;
         }
         [HttpGet]
-        public IActionResult ListarTarefas()
+        public IActionResult AdicionarTarefas()
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -32,7 +32,7 @@ namespace ListaDeTarefas.Controllers
 
         
         [HttpGet]
-        public IActionResult ListarTarefasDashBoard()
+        public IActionResult ListarTarefasFinalizadas()
         {
             if (User.Identity.IsAuthenticated)
             {
