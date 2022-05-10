@@ -66,7 +66,7 @@ function AjaxFinalizarTarefa(id) {
 
 function AjaxFinalizarTarefaEmMassa() {
     var listaIdTarefa = [];
-    $("#table-tarefa input[type='hidden']").each((i, z) => {
+    $("input[type='hidden']").each((i, z) => {
         if ($(`#finalizar-${z.value}`).is(":checked")) {
             listaIdTarefa.push(z.value)
         }

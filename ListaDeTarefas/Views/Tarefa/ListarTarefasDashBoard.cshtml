@@ -60,55 +60,54 @@
     <div class="card-body">
         <div id="Tarefas-Finalizadas">
             <div class="card-body">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>
+                
+                        <div class="row border-bottom" style="margin-top:10px;">
+                            <div class="col-1">
                                 Id
-                            </th>
-                            <th>
+                            </div>
+                            <div class="col-2">
                                 Tarefa
-                            </th>
-                            <th>
+                            </div>
+                            <div class="col-3">
                                 Descrição
-                            </th>
-                            <th>
+                            </div>
+                            <div class="col-2">
                                 Data prevista
-                            </th>
-                            <th>
+                            </div>
+                            <div class="col-2">
                                 Data termino
-                            </th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody id="table-tarefa">
+                            </div>
+                            <div class="col-2"></div>
+                        </div>
+                    
+                    
                         @foreach (var item in Model.TarefasFinalizadas)
                         {
-                            <tr>
-                                <td>
+                            <div class="row border-bottom" style="margin-top:10px;">
+                                <div class="col-1">
                                     @item.Id
-                                </td>
-                                <td>
+                                </div>
+                                <div class="col-2">
                                     @Html.DisplayFor(modelItem => item.Titulo)
-                                </td>
-                                <td>
+                                </div>
+                                <div class="col-3">
                                     @Html.DisplayFor(modelItem => item.Descricao)
-                                </td>
-                                <td>
+                                </div>
+                                <div class="col-2">
                                     @item.DtTarefaFim.ToString("dd/MM/yyyy")
-                                </td>
-                                <td>
+                                </div>
+                                <div class="col-2">
                                     @item.DtEncerramento.ToString("dd/MM/yyyy")
-                                </td>
-                                <td>
+                                </div>
+                                <div class="col-2">
                                     <button type="button" class="btn btn-primary" onclick="AjaxRestaurarTarefa(@item.Id)">
                                         Restaurar tarefa
                                     </button>
-                                </td>
-                            </tr>
+                                </div>
+                            </div>
                         }
-                    </tbody>
-                </table>
+                    
+                
             </div>
         </div>
         @*<div id="Tarefas-Nao-Finalizadas">
