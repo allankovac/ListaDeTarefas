@@ -12,55 +12,56 @@
     <title>Lista De Tarefas</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/autenticacao.css" />
     <link rel="stylesheet" href="~/ListaDeTarefas.styles.css" asp-append-version="true" />
 </head>
 <body>
-
     <div class="container">
         <div class="d-flex justify-content-center">
             <div class="col-md-6" style="margin-top: 10%;">
                 <div class="card">
-                    <div id="feedBack">
-                    </div>
+                    <div id="feedBack"></div>
                     <div class="card-body">
                         <div class="justify-content-center">
                             <div class="col-md-12">
-                                <div class="offset-md-3">
-                                    <h1>Cadastro</h1>
-                                </div>
+                                <h1>Cadastro</h1>
                             </div>
-
-
                             <div class="offset-md-3 col-md-6">
-                                <div id="formularioLogin">
-                                    <div class="form-group">
+                                <div class="formularioCadastro">
+                                    <div class="form-group form-campo">
                                         <label>Nome</label>
                                         <input id="Nome" type="text" class="form-control" required />
+                                        <div id="nome" class="invalid-feedback">
+                                        </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group form-campo">
                                         <label>Sobrenome</label>
                                         <input id="SobreNome" type="text" class="form-control" required />
+                                        <div id="sobrenome" class="invalid-feedback">
+                                        </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group form-campo">
                                         <label>Email</label>
                                         <input id="Email" type="text" class="form-control" required />
+                                        <div id="emai" class="invalid-feedback">
+                                        </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group form-campo">
                                         <label>Senha</label>
-                                        <input id="Password" type="password" class="form-control" required />
+                                        <input id="Password" type="password" class="form-control" required />                                        
+                                        <div id="senha" class="invalid-feedback">
+                                        </div>
                                     </div>
-                                    <div class="d-flex justify-content-end" style="margin-top: 10px;">
+                                    <div class="row d-flex form-campo">
                                         <div class="form-group">
-                                            <button id="btn-salvar" type="button" class="btn btn-primary" onclick="AjaxRegistro()">Salvar</button>
+                                            <button id="btn-salvar" type="button" class="btn btn-tela col-md-12" onclick="AjaxRegistro()">Salvar</button>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <a asp-controller="Login" asp-action="Login">Voltar</a>
+                                        <p class="link">Já possui conta? <a asp-controller="Login" asp-action="Login">Login</a></p>
                                     </div>
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
                 </div>
@@ -74,8 +75,7 @@
     <script src="~/js/Login/script.js"></script>
     <script>
         $(document).keypress(function(e) {
-            if(e.which === 13)
-            {
+            if (e.which === 13) {
                 $('#btn-salvar').click();
             }
         });

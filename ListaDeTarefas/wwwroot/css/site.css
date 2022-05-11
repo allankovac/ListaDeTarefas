@@ -17,3 +17,26 @@ body {
   margin-bottom: 60px;
   background-color: #fafafa;
 }
+
+button.btn-tela {
+    background-color: #43bed7;
+    color: #fff;
+}
+
+button.btn-tela:hover {
+    color: #edebeb;
+}
+
+input:focus {
+    outline: none;
+}
+
+.form-campo{
+    margin-top: 10px;
+}
+
+#feedBack .alert-danger {
+    color: #ff0000;
+    background: none;
+    border-color: #ff0000;
+}
