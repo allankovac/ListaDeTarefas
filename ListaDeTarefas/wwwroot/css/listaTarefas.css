@@ -1,0 +1,11 @@
+﻿.tarefas {
+    margin-top: 10px;
+}
+
+.card-superior {
+    shadow-box: 0 0 2px #000;
+}
+
+.card-superior .nav-link {
+    padding: 0;
+}

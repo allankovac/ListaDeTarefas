@@ -27,7 +27,7 @@
     <div class="col-md-6">
         <div class="card text-white bg-primary mb-6">
             <div class="card-header">
-                <h4 class="card-title">Tarefas Em aberto</h4>
+                <h4 class="card-title">Tarefas Abertas</h4>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -94,8 +94,8 @@
                         </div>
                         <div class="col-2">
                             @*<button type="button" class="btn btn-primary" onclick="AjaxRestaurarTarefa(@item.Id)">
-                                Restaurar tarefa
-                            </button>*@
+                        Restaurar tarefa
+                        </button>*@
                         </div>
                     </div>
                 }
@@ -104,21 +104,12 @@
     </div>
 </div>
 
-
-<style>
-    .tarefas {
-        margin-top: 10px;
-    }
-
-    .card-superior {
-        shadow-box: 0 0 2px #000;
-    }
-</style>
+<link rel="stylesheet" href="~/css/listaTarefas.css" />
 
 @section Scripts {
     @{
-    await Html.RenderPartialAsync("_ValidationScriptsPartial");
-}
-<script src="~/js/Tarefa/ListarTarefasFinalizadas.js"></script>
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="~/js/Tarefa/ListarTarefasFinalizadas.js"></script>
 
 }
