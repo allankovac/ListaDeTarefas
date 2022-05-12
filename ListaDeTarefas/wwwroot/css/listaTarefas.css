@@ -1,11 +1,51 @@
-﻿.tarefas {
-    margin-top: 10px;
+﻿.card-superior .card {
+    color: white;
+    margin-top: 1em;
 }
 
-.card-superior {
-    shadow-box: 0 0 2px #000;
+.card-superior .card-selecionado {
+    box-shadow: 0 0 3px #000;
+}
+
+.card-superior .card-finalizado {
+    background-color: #48c3b3;
+}
+
+.card-superior .card-aberto {
+    background-color: #de8679;
 }
 
 .card-superior .nav-link {
     padding: 0;
+}
+
+.lista-tarefas {
+    margin-top: 2em;
+}
+
+.lista-tarefas .card-title {
+    text-align: left;
+    color: #fff;
+    margin: 5px 0px 5px 0;
+}
+
+.lista-tarefas#abertas .card-header {
+    background-color: #DE8679;
+}
+
+.lista-tarefas#finalizadas .card-header {
+    background-color: #46BDAD;
+}
+
+.tarefas{
+    margin-top: 1em;
+}
+
+.tarefas .card-title {
+    color: #fff;
+    margin: 5px 0px 5px 0;
+}
+
+.tarefas .card-header {
+    background-color: #6cbccd;
 }
