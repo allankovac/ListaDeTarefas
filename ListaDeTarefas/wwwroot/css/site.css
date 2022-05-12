@@ -18,6 +18,10 @@ body {
   background-color: #fafafa;
 }
 
+h1, h2, h3, h4 {
+    font-family: Arial, sans-serif;
+}
+
 button.btn-tela {
     background-color: #43bed7;
     color: #fff;
@@ -35,8 +39,30 @@ input:focus {
     margin-top: 10px;
 }
 
-#feedBack .alert-danger {
+#feedBack .alert-danger{
     color: #ff0000;
     background: none;
     border-color: #ff0000;
+}
+
+#feedBack .alert-success {
+    background: none;
+}
+
+.loading.ativo {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(255,255,255,0.7);
+    z-index: 9999;
+}
+
+.loading .spin-load {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 40%;
 }

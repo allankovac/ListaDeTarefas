@@ -8,13 +8,12 @@
     <div class="offset-md-1 col-md-10">
         <div id="feedBack">
         </div>
-        <div class="card">
+        <div class="card tarefas">            
+            <div class="card-header">
+                <h4 class="card-title">Adicionar Tarefa</h4>
+            </div>
             <div class="card-body">
-
                 <div class="offset-md-1 col-md-10">
-                    <div class="titulo-card">
-                    <h3>Adicionar Tarefa</h3>
-                    </div>
                     <div class="row">
                         <form asp-action="CriarTarefa">
                             <div id="formularioTarefa">
@@ -49,19 +48,16 @@
                 </div>
             </div>
         </div>
-
-
         <div class="card tarefas">
+            <div class="card-header">
+                <h4 class="card-title">Lista de Tarefas</h4>
+            </div>
             <div class="card-body">
-                <div class="titulo-card"></div>
-                <h3>Lista de Tarefas</h3>
                 <div class="row">
                     <div class="d-flex justify-content-end">
-                        <button type="button" class="btn btn-tela" onclick="AjaxFinalizarTarefaEmMassa()">Finalizar Tarefas Selecionadas</button>
+                        <button type="button" class="btn btn-tela" onclick="AjaxFinalizarTarefaEmMassa()">Finalizar Selecionadas</button>
                     </div>
                 </div>
-
-
                 <div class="row border-bottom" style="margin-top:10px;">
                     <div class="col-1">
                         <input type="checkbox" id="finalizar-todos" onclick="ativarTodos()">
@@ -89,41 +85,30 @@
                             @item.DtTarefaFim.ToString("dd/MM/yyyy")
                         </div>
                         <div class="col-2">
-                            <button type="button" class="btn btn-tela" onclick="AjaxFinalizarTarefa(@item.Id)">Finalizar Tarefa</button>
+                            <button type="button" class="btn btn-tela" onclick="AjaxFinalizarTarefa(@item.Id)">Finalizar</button>
                         </div>
                     </div>
                 }
-
             </div>
         </div>
     </div>
-
-
 </div>
 
-
-
-
+<link rel="stylesheet" href="~/css/listaTarefas.css" />
 <link rel="stylesheet" href="~/lib/jquery-ui/css/jquery-ui.min.css" />
-<style>
-    .tarefas {
-        margin-top: 10px;
-    }
-</style>
 
 @section Scripts {
     @{
-    await Html.RenderPartialAsync("_ValidationScriptsPartial");
-}
-<script src="~/lib/jquery-ui/jquery-ui.min.js"></script>
-<script src="~/js/site.js"></script>
-<script src="~/js/Tarefa/script.js"></script>
-<script>
-    $(document).keypress(function(e) {
-        if(e.which === 13)
-        {
-            $('#btn-salvar').click();
-        }
-    });
-</script>
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="~/lib/jquery-ui/jquery-ui.min.js"></script>
+    <script src="~/js/site.js"></script>
+    <script src="~/js/Tarefa/script.js"></script>
+    <script>
+        $(document).keypress(function(e) {
+            if (e.which === 13) {
+                $('#btn-salvar').click();
+            }
+        });
+    </script>
 }

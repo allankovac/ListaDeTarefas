@@ -3,7 +3,7 @@
 <div class="row card-superior">
     <div class="col-md-6">
         <a href="/Tarefa/ListarTarefasFinalizadas" class="nav-link">
-            <div class="card text-white bg-success mb-6">
+            <div class="card mb-6 card-finalizado">
                 <div class="card-header">
                     <h4 class="card-title">Tarefas Finalizadas</h4>
                 </div>
@@ -25,14 +25,14 @@
     </div>
 
     <div class="col-md-6">
-        <div class="card text-white bg-primary mb-6">
+        <div class="card mb-6 card-aberto card-selecionado">
             <div class="card-header">
                 <h4 class="card-title">Tarefas Abertas</h4>
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-4">
-                        <h4>finalizar: @Model.TotalEmAbertoAntes</h4>
+                        <h4>Finalizar: @Model.TotalEmAbertoAntes</h4>
                     </div>
                     <div class="col-md-4">
                         <h4>Atrasado: @Model.TotalEmAbertoDepois</h4>
@@ -46,33 +46,31 @@
     </div>
 </div>
 
-<div class="card text-center" style="margin-top:15px;">
+<div class="card lista-tarefas" id="abertas">
     <div class="card-header">
         <h4 class="card-title">Tarefas Abertas</h4>
     </div>
     <div class="card-body">
         <div id="Tarefas-Abertas">
             <div class="card-body">
-
                 <div class="row border-bottom" style="margin-top:10px;">
                     <div class="col-1">
-                        Id
+                        <b>ID</b>
                     </div>
                     <div class="col-2">
-                        Tarefa
+                        <b>Tarefa</b>
                     </div>
                     <div class="col-3">
-                        Descrição
+                        <b>Descrição</b>
                     </div>
                     <div class="col-2">
-                        Data prevista
+                        <b>Data prevista</b>
                     </div>
                     <div class="col-2">
-                        Data término
+                        <b>Data término</b>
                     </div>
                     <div class="col-2"></div>
                 </div>
-
 
                 @foreach (var item in Model.TarefasNaoFinalizadas)
                 {
@@ -90,12 +88,10 @@
                             @item.DtTarefaFim.ToString("dd/MM/yyyy")
                         </div>
                         <div class="col-2">
-                            @item.DtEncerramento.ToString("dd/MM/yyyy")
+                            -
                         </div>
                         <div class="col-2">
-                            @*<button type="button" class="btn btn-primary" onclick="AjaxRestaurarTarefa(@item.Id)">
-                        Restaurar tarefa
-                        </button>*@
+                            <button type="button" class="btn btn-tela" onclick="AjaxFinalizarTarefa(@item.Id)">Finalizar Tarefa</button>
                         </div>
                     </div>
                 }
@@ -105,6 +101,7 @@
 </div>
 
 <link rel="stylesheet" href="~/css/listaTarefas.css" />
+<script src="~/js/Tarefa/script.js"></script>
 
 @section Scripts {
     @{
