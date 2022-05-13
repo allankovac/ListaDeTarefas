@@ -16,8 +16,6 @@ function AjaxRegistrarTarefas() {
         'Data': $("#DtTarefaFim").val()
     };
 
-    limparFeedBack();
-
     if (ValidarFormularioDeCriacaoDeTarefa(obj)) {
         let request = $.ajax({
             url: "/tarefa/CriarTarefa",
@@ -31,22 +29,24 @@ function AjaxRegistrarTarefas() {
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         ${response.mensagem}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>`);
+                    </div>`
+                );
                 window.location.replace(`/tarefa/AdicionarTarefas/`);
             } else {
                 $('#feedBack').append(`
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         ${response.mensagem}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>`);
+                    </div>`
+                );
             }
 
         });
     }
-    
 }
 
 function AjaxFinalizarTarefa(id) {
+
     let request = $.ajax({
         url: "/tarefa/FinalizarTarefa",
         data: {
@@ -60,9 +60,12 @@ function AjaxFinalizarTarefa(id) {
             alert(response.mensagem);
 
             window.location.replace(`/tarefa/AdicionarTarefas/`);
+        } else {
+            alert("Um erro ocorreu. Tente novamente mais tarde.");
         }
-    });
+    }); 
 }
+
 function ativarTodos() {
     $("input[type='hidden']").each((i, z) => {
         if ($('#finalizar-todos').is(":checked")) {
@@ -73,6 +76,7 @@ function ativarTodos() {
         }
     });
 }
+
 function AjaxFinalizarTarefaEmMassa() {
     var listaIdTarefa = [];
     $("input[type='hidden']").each((i, z) => {
@@ -81,10 +85,68 @@ function AjaxFinalizarTarefaEmMassa() {
         }
     });
 
+    if (listaIdTarefa.length > 0) {
+        let request = $.ajax({
+            url: "/tarefa/FinalizarTarefaEmMassa",
+            data: {
+                listaId: listaIdTarefa
+            },
+            type: "post",
+        });
+    
+        request.done(function (response, textStatus, jqXHR) {
+            if (response.status === "sucesso") {
+                alert(response.mensagem);
+    
+                window.location.replace(`/tarefa/AdicionarTarefas/`);
+            }
+        });
+    } else {
+        alert("Nenhuma tarefa foi selecionada.")
+    }
+}
+
+function ValidarFormularioDeCriacaoDeTarefa(obj) {
+    let validacao = true;
+    let form = $('.formularioTarefa')[0];
+
+    form.classList.add('was-validated');
+
+    if (!obj['Tarefa.Titulo']) {
+        $('#titulo.invalid-feedback').html(`Campo obrigatório.`);
+        validacao = false;
+    }
+    if (!obj.Data) {
+        $('#data-entrega.invalid-feedback').html(`Campo obrigatório.`);
+        validacao = false;
+    } else {
+        $('#descricao.invalid-feedback').html(``);
+    }
+
+    return validacao; 
+}
+
+function showTarefas(tarefa) {
+    $(`#${tarefa}`).addClass('active');
+
+    if (tarefa === 'Nao-Finalizadas') {
+        $(`#Finalizadas`).removeClass('active');
+        $(`#Tarefas-Finalizadas`).hide();
+    }
+    else {
+        $(`#Nao-Finalizadas`).removeClass('active');
+        $(`#Tarefas-Nao-Finalizadas`).hide();
+    }
+
+    $(`#Tarefas-${tarefa}`).show();
+}
+
+function AjaxRestaurarTarefa(id) {
+    console.log(id);
     let request = $.ajax({
-        url: "/tarefa/FinalizarTarefaEmMassa",
+        url: "/tarefa/RestaurarTarefa",
         data: {
-            listaId: listaIdTarefa
+            id: id
         },
         type: "post",
     });
@@ -93,30 +155,7 @@ function AjaxFinalizarTarefaEmMassa() {
         if (response.status === "sucesso") {
             alert(response.mensagem);
 
-            window.location.replace(`/tarefa/AdicionarTarefas/`);
+            window.location.replace(`/tarefa/ListarTarefasFinalizadas/`);
         }
     });
-}
-
-
-function ValidarFormularioDeCriacaoDeTarefa(obj) {
-    if (!obj['Tarefa.Titulo']) {
-        $('#feedBack').append(`
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        Campo obrigatório não preenchido.
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>`);
-        return false;
-    }
-    else if (!obj.Data) {
-        $('#feedBack').append(`
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        Campo obrigatório não preenchido.
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>`);
-
-        return false;
-    }
-
-    return true; 
 }
