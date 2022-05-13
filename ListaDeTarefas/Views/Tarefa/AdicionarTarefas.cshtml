@@ -6,45 +6,36 @@
 
 <div class="container">
     <div class="offset-md-1 col-md-10">
-        <div id="feedBack">
-        </div>
-        <div class="card tarefas">            
+        <div id="feedBack"></div>
+        <div class="modal-confirmacao"></div>
+        <div class="card tarefas">
             <div class="card-header">
                 <h4 class="card-title">Adicionar Tarefa</h4>
             </div>
             <div class="card-body">
-                <div class="offset-md-1 col-md-10">
-                    <div class="row">
-                        <form asp-action="CriarTarefa">
-                            <div id="formularioTarefa">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Título</label>
-                                            <input type="text" id="Titulo" class="form-control" />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Data de entrega</label>
-                                            <input type="text" id="DtTarefaFim" class="form-control" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>Descrição da tarefa</label>
-                                        <textarea id="Descricao" class="form-control"></textarea>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-end" style="margin-top: 10px;">
-                                    <div class="form-group" style="margin-top: 10px;">
-                                        <button id="btn-salvar" type="button" class="btn btn-tela" onclick="AjaxRegistrarTarefas()">Salvar</button>
-                                    </div>
-                                </div>
+                <div class="row offset-md-2">
+                    <form asp-action="CriarTarefa" class="formularioTarefa">
+                        <div class="row">
+                            <div class="form-group col-md-6 form-campo">
+                                <label>Título</label>
+                                <input type="text" id="Titulo" class="form-control" required />
+                                <div id="titulo" class="invalid-feedback"></div>
                             </div>
-                        </form>
-                    </div>
+                            <div class="form-group col-md-3 form-campo">
+                                <label>Data de entrega</label>
+                                <input type="text" id="DtTarefaFim" class="form-control" required />
+                                <div id="data-entrega" class="invalid-feedback"></div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-9 form-campo">
+                            <label>Descrição da tarefa</label>
+                            <textarea id="Descricao" class="form-control"></textarea>
+                            <div id="descricao" class="invalid-feedback"></div>
+                        </div>
+                        <div class="form-group form-campo d-flex col-md-9 justify-content-end">
+                            <button id="salvar-tarefa" type="button" class="btn btn-tela" onclick="AjaxRegistrarTarefas()">Salvar</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -52,26 +43,21 @@
             <div class="card-header">
                 <h4 class="card-title">Lista de Tarefas</h4>
             </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="d-flex justify-content-end">
-                        <button type="button" class="btn btn-tela" onclick="AjaxFinalizarTarefaEmMassa()">Finalizar Selecionadas</button>
-                    </div>
-                </div>
-                <div class="row border-bottom" style="margin-top:10px;">
-                    <div class="col-1">
+            <div class="card-body" id="lista">
+                <div class="row border-bottom tabela-header">
+                    <div class="col-1" id="check">
                         <input type="checkbox" id="finalizar-todos" onclick="ativarTodos()">
                     </div>
-                    <div class="col-3">Tarefa</div>
-                    <div class="col-4">Descrição</div>
-                    <div class="col-2">Data Finalização</div>
+                    <div class="col-3">TAREFA</div>
+                    <div class="col-4">DESCRIÇÃO</div>
+                    <div class="col-2">FINALIZAÇÃO</div>
                     <div class="col-2"></div>
                 </div>
 
                 @foreach (var item in Model.Tarefas)
                 {
-                    <div class="row border-bottom" style="margin-top:10px;">
-                        <div class="col-1">
+                    <div class="row border-bottom tabela-body">
+                        <div class="col-1" id="check">
                             <input type="hidden" value="@item.Id">
                             <input type="checkbox" id="finalizar-@item.Id">
                         </div>
@@ -84,18 +70,28 @@
                         <div class="col-2">
                             @item.DtTarefaFim.ToString("dd/MM/yyyy")
                         </div>
-                        <div class="col-2">
-                            <button type="button" class="btn btn-tela" onclick="AjaxFinalizarTarefa(@item.Id)">Finalizar</button>
+                        <div class="col-2" style="text-align: center">
+                            <button type="button" class="btn" style="color: #43bed7" onclick="modalConfirmacao(AjaxFinalizarTarefa, 'AjaxFinalizarTarefa', @item.Id)"
+                                data-toggle="tooltip" title="Finalizar Tarefa ID @item.Id">
+                                <svg style="width: 24px; height: 24px" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-clipboard2-check-fill" viewBox="0 0 20 20">
+                                    <path d="M10 .5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5.5.5 0 0 1-.5.5.5.5 0 0 0-.5.5V2a.5.5 0 0 0 .5.5h5A.5.5 0 0 0 11 2v-.5a.5.5 0 0 0-.5-.5.5.5 0 0 1-.5-.5Z" />
+                                    <path d="M4.085 1H3.5A1.5 1.5 0 0 0 2 2.5v12A1.5 1.5 0 0 0 3.5 16h9a1.5 1.5 0 0 0 1.5-1.5v-12A1.5 1.5 0 0 0 12.5 1h-.585c.055.156.085.325.085.5V2a1.5 1.5 0 0 1-1.5 1.5h-5A1.5 1.5 0 0 1 4 2v-.5c0-.175.03-.344.085-.5Zm6.769 6.854-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708.708Z" />
+                                </svg>
+                            </button>
                         </div>
                     </div>
                 }
+            </div>
+            <div class="row" style="margin: 20px 0 20px 10px">
+                <div class="d-flex justify-content-start">
+                    <button type="button" class="btn btn-tela" onclick="modalConfirmacao(AjaxFinalizarTarefaEmMassa, 'AjaxFinalizarTarefaEmMassa')">Finalizar Selecionadas</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 <link rel="stylesheet" href="~/css/listaTarefas.css" />
-<link rel="stylesheet" href="~/lib/jquery-ui/css/jquery-ui.min.css" />
 
 @section Scripts {
     @{

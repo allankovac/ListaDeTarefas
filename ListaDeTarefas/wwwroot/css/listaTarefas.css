@@ -19,8 +19,18 @@
     padding: 0;
 }
 
+#check{
+    padding-left: 24px;
+}
+
 .lista-tarefas {
     margin-top: 2em;
+}
+
+.lista-tarefas .card-body {
+    max-height: 500px;
+    overflow-y: scroll;
+    margin-left: 1em;
 }
 
 .lista-tarefas .card-title {
@@ -41,6 +51,10 @@
     margin-top: 1em;
 }
 
+.tarefas #salvar-tarefa{
+    width: 31%;
+}
+
 .tarefas .card-title {
     color: #fff;
     margin: 5px 0px 5px 0;
@@ -48,4 +62,35 @@
 
 .tarefas .card-header {
     background-color: #6cbccd;
+}
+
+.tarefas #lista {
+    overflow-y: scroll;
+    max-height: 300px;
+}
+
+.tabela-header{
+    font-weight: 500;
+    padding: 10px 0 10px 0;
+}
+
+.tabela-body{
+    padding: 10px 0 10px 0;
+}
+
+.was-validated .form-control:valid {
+    border-color: #dfdfdf;
+    padding-right: 0;
+    background: none;
+}
+
+.was-validated .form-control:valid:focus {
+    border-color: #dfdfdf;
+}
+
+.was-validated .form-control:valid:focus,
+.was-validated .form-control:invalid:focus,
+.form-group input:focus {
+    box-shadow: none;
+    outline: none;
 }

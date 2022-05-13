@@ -31,3 +31,49 @@ function loading(load) {
         $('.loading').removeClass('ativo');
     }
 }
+
+function modalConfirmacao(func, nome, id = '') {
+    
+    var obj = mensagemModal(nome);
+
+    if (obj.ativo) {
+        $('.modal-confirmacao').addClass('ativo');
+        $('.modal-confirmacao.ativo').html(`
+            <div class="modal" tabindex = "-1" role = "dialog" >
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">${obj.titulo}</h5>
+                        </div>
+                        <div class="modal-body">
+                            <p>${obj.texto}</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="confirma">Confirmar</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancela">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `);
+    } else {
+        alert("Um erro inesperado ocorreu. Tente novamente depois.");
+    }
+    $("button#confirma")[0].addEventListener("click", function () { func(id) });
+    $("button#cancela")[0].addEventListener("click", function () { $('.modal-confirmacao').removeClass('ativo').html(''); });
+}
+
+function mensagemModal(nome) {
+    let obj = {};
+  
+    if (nome == "AjaxFinalizarTarefaEmMassa") {
+        obj.titulo = "Finalizar Tarefa"; obj.texto = "Deseja mesmo finalizar a(s) tarefa(s)?"; obj.ativo = true;
+    } else if (nome == "AjaxFinalizarTarefa") {
+        obj.titulo = "Finalizar Tarefa"; obj.texto = "Deseja mesmo finalizar a tarefa?"; obj.ativo = true;
+    } else if (nome = "AjaxRegistrarTarefas") {
+        obj.titulo = "Adicionar Tarefa"; obj.texto = "Confirma adicionar nova tarefa?"; obj.ativo = true;
+    } else if (nome = "AjaxRestaurarTarefa") {
+        obj.titulo = "Restaurar Tarefa"; obj.texto = "Confirma restauração da tarefa?"; obj.ativo = true;
+    }
+    return obj;
+}

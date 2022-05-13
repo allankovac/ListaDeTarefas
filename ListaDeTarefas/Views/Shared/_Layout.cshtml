@@ -6,14 +6,15 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ListaDeTarefas</title>
+    <title>ListaDeTarefas</title>    
+    <link rel="stylesheet" href="~/lib/jquery-ui/css/jquery-ui.min.css" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ListaDeTarefas.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white box-shadow mb-3">
             <div class="container-fluid">
                 <div class="navbar-brand">
                     <a class="nav-link text-dark" asp-area="" asp-controller="Tarefa" asp-action="ListarTarefasFinalizadas">Lista De Tarefas</a>
@@ -68,17 +69,6 @@
             &copy; 2022 - ListaDeTarefas - Versão - 0.3
         </div>
     </footer>
-
-    <style>
-        .dropdown-menu{
-            min-width: 13em !important;
-        }
-        
-        button.btn-tela {
-          background-color: #43bed7;
-          color: #fff;
-        }
-    </style>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

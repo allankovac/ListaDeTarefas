@@ -1,7 +1,9 @@
 ﻿@model TarefaViewModel
 
+<div class="modal-confirmacao"></div>
 <div class="row card-superior">
     <div class="col-md-6">
+        <div class="modal-confirmacao"></div>
         <div class="card mb-6 card-finalizado card-selecionado">
             <div class="card-header">
                 <h4 class="card-title">Tarefas Finalizadas</h4>
@@ -59,56 +61,41 @@
         </li>
         </ul>*@
     </div>
-    <div class="card-body">
-        <div id="Tarefas-Finalizadas">
-            <div class="card-body">
-                <div class="row border-bottom" style="margin-top:10px;">
-                    <div class="col-1">
-                        <b>ID</b>
-                    </div>
-                    <div class="col-2">
-                        <b>Tarefa</b>
-                    </div>
-                    <div class="col-3">
-                        <b>Descrição</b>
-                    </div>
-                    <div class="col-2">
-                        <b>Data prevista</b>
-                    </div>
-                    <div class="col-2">
-                        <b>Data término</b>
-                    </div>
-                    <div class="col-2"></div>
-                </div>
-
-
-                @foreach (var item in Model.TarefasFinalizadas)
-                {
-                    <div class="row border-bottom" style="margin-top:10px;">
-                        <div class="col-1">
-                            @item.Id
-                        </div>
-                        <div class="col-2">
-                            @Html.DisplayFor(modelItem => item.Titulo)
-                        </div>
-                        <div class="col-3">
-                            @Html.DisplayFor(modelItem => item.Descricao)
-                        </div>
-                        <div class="col-2">
-                            @item.DtTarefaFim.ToString("dd/MM/yyyy")
-                        </div>
-                        <div class="col-2">
-                            @item.DtEncerramento.ToString("dd/MM/yyyy")
-                        </div>
-                        <div class="col-2">
-                            <button type="button" class="btn btn-tela" onclick="AjaxRestaurarTarefa(@item.Id)">
-                                Restaurar tarefa
-                            </button>
-                        </div>
-                    </div>
-                }
-            </div>
+    <div class="card-body" id="tarefas-finalizadas">
+        <div class="row border-bottom tabela-header">
+            <div class="col-1">ID</div>
+            <div class="col-2">TAREFA</div>
+            <div class="col-3">DESCRIÇÃO</div>
+            <div class="col-2">PREVISÃO</div>
+            <div class="col-2">TÉRMINO</div>
+            <div class="col-1"></div>
         </div>
+
+        @foreach (var item in Model.TarefasFinalizadas)
+        {
+            <div class="row border-bottom tabela-body">
+                <div class="col-1">
+                    @item.Id
+                </div>
+                <div class="col-2">
+                    @Html.DisplayFor(modelItem => item.Titulo)
+                </div>
+                <div class="col-3">
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </div>
+                <div class="col-2">
+                    @item.DtTarefaFim.ToString("dd/MM/yyyy")
+                </div>
+                <div class="col-2">
+                    @item.DtEncerramento.ToString("dd/MM/yyyy")
+                </div>
+                <div class="col-1 justify-content-center">
+                    <button type="button" class="btn btn-tela" onclick="modalConfirmacao(AjaxRestaurarTarefa, 'AjaxRestaurarTarefa', @item.Id)">
+                        Restaurar
+                    </button>
+                </div>
+            </div>
+        }
         @*<div id="Tarefas-Nao-Finalizadas">
         <div class="card-body">
         <table class="table">
@@ -157,14 +144,13 @@
         </div>*@
     </div>
 </div>
-
 <link rel="stylesheet" href="~/css/listaTarefas.css" />
 
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-    <script src="~/js/Tarefa/ListarTarefasFinalizadas.js"></script>
-
+    <script src="~/js/site.js"></script>
+    <script src="~/js/Tarefa/script.js"></script>
 }
 
