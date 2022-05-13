@@ -17,6 +17,7 @@ function AjaxRegistrarTarefas() {
     };
 
     if (ValidarFormularioDeCriacaoDeTarefa(obj)) {
+
         let request = $.ajax({
             url: "/tarefa/CriarTarefa",
             data: obj,
@@ -25,22 +26,11 @@ function AjaxRegistrarTarefas() {
 
         request.done(function (response, textStatus, jqXHR) {
             if (response.status === "sucesso") {
-                $('#feedBack').html(`
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        ${response.mensagem}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>`
-                );
+                alert(response.mensagem);
                 window.location.replace(`/tarefa/AdicionarTarefas/`);
             } else {
-                $('#feedBack').append(`
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        ${response.mensagem}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>`
-                );
+                alert(response.mensagem);
             }
-
         });
     }
 }
@@ -142,7 +132,7 @@ function showTarefas(tarefa) {
 }
 
 function AjaxRestaurarTarefa(id) {
-    console.log(id);
+
     let request = $.ajax({
         url: "/tarefa/RestaurarTarefa",
         data: {

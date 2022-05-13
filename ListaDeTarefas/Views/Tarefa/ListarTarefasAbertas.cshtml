@@ -2,6 +2,7 @@
 
 <div class="row card-superior">
     <div class="col-md-6">
+        <div class="modal-confirmacao"></div>
         <a href="/Tarefa/ListarTarefasFinalizadas" class="nav-link">
             <div class="card mb-6 card-finalizado">
                 <div class="card-header">
@@ -75,7 +76,7 @@
                     @item.DtTarefaFim.ToString("dd/MM/yyyy")
                 </div>
                 <div class="col-2">
-                    <button type="button" class="btn btn-tela" onclick="modalConfirmacao(AjaxFinalizarTarefa,'AjaxFinalizarTarefa', @item.Id")>Finalizar</button>
+                    <button type="button" class="btn btn-tela" onclick="modalConfirmacao(AjaxFinalizarTarefa,'AjaxFinalizarTarefa', @item.Id)">Finalizar</button>
                 </div>
             </div>
         }

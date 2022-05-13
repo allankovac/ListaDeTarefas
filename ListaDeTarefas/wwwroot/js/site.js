@@ -35,7 +35,7 @@ function loading(load) {
 function modalConfirmacao(func, nome, id = '') {
     
     var obj = mensagemModal(nome);
-    console.log(id);
+
     if (obj.ativo) {
         $('.modal-confirmacao').addClass('ativo');
         $('.modal-confirmacao.ativo').html(`
