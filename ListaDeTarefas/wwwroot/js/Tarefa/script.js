@@ -1,15 +1,4 @@
-﻿$(document).ready(() => {
-    $("#DtTarefaFim").datepicker({
-        dateFormat: 'dd/mm/yy',
-        dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'],
-        dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
-        dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
-        monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-        monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
-    });
-});
-
-function AjaxRegistrarTarefas() {
+﻿function AjaxRegistrarTarefas() {
     var obj = {
         'Tarefa.Titulo': $("#Titulo").val(),
         'Tarefa.Descricao': $("#Descricao").val(),
@@ -48,8 +37,8 @@ function AjaxFinalizarTarefa(id) {
     request.done(function (response, textStatus, jqXHR) {
         if (response.status === "sucesso") {
             alert(response.mensagem);
-
-            window.location.replace(`/tarefa/AdicionarTarefas/`);
+            var pathname = $(location).attr('pathname');
+            window.location.replace(pathname);
         } else {
             alert("Um erro ocorreu. Tente novamente mais tarde.");
         }
@@ -132,7 +121,6 @@ function showTarefas(tarefa) {
 }
 
 function AjaxRestaurarTarefa(id) {
-
     let request = $.ajax({
         url: "/tarefa/RestaurarTarefa",
         data: {
@@ -145,7 +133,7 @@ function AjaxRestaurarTarefa(id) {
         if (response.status === "sucesso") {
             alert(response.mensagem);
 
-            window.location.replace(`/tarefa/ListarTarefasFinalizadas/`);
+            window.location.replace(`/Tarefa/ListarTarefasFinalizadas/`);
         }
     });
 }

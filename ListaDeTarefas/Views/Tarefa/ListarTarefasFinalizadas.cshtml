@@ -2,8 +2,7 @@
 
 <div class="modal-confirmacao"></div>
 <div class="row card-superior">
-    <div class="col-md-6">
-        <div class="modal-confirmacao"></div>
+    <div class="col-md-6">  
         <div class="card mb-6 card-finalizado card-selecionado">
             <div class="card-header">
                 <h4 class="card-title">Tarefas Finalizadas</h4>
@@ -11,7 +10,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-4">
-                        <h4>Adiantado: @Model.TotalFinalizadoAntes</h4>
+                        <h4>Em dia: @Model.TotalFinalizadoAntes</h4>
                     </div>
                     <div class="col-md-4">
                         <h4>Atrasado: @Model.TotalFinalizadoDepois</h4>
@@ -51,15 +50,6 @@
 <div class="card lista-tarefas" id="finalizadas">
     <div class="card-header">
         <h4 class="card-title">Tarefas Finalizadas</h4>
-        @*<ul class="nav nav-tabs card-header-tabs">
-        <li class="nav-item">
-        <a id="Nao-Finalizadas" class="nav-link" onclick="showTarefas('Nao-Finalizadas')" href="#">Em Aberto</a>
-        </li>
-
-        <li class="nav-item">
-        <a id="Finalizadas" class="nav-link" onclick="showTarefas('Finalizadas')" aria-current="true" href="#">Finalizadas</a>
-        </li>
-        </ul>*@
     </div>
     <div class="card-body" id="tarefas-finalizadas">
         <div class="row border-bottom tabela-header">
@@ -96,52 +86,6 @@
                 </div>
             </div>
         }
-        @*<div id="Tarefas-Nao-Finalizadas">
-        <div class="card-body">
-        <table class="table">
-        <thead>
-        <tr>
-        <th>
-        Id
-        </th>
-        <th>
-        Tarefa
-        </th>
-        <th>
-        Descrição
-        </th>
-        <th>
-        Data prevista
-        </th>
-        <th>
-        Data término
-        </th>
-        </tr>
-        </thead>
-        <tbody id="table-tarefa">
-        @foreach (var item in Model.TarefasNaoFinalizadas)
-        {
-        <tr>
-        <td>
-        @item.Id
-        </td>
-        <td>
-        @Html.DisplayFor(modelItem => item.Titulo)
-        </td>
-        <td>
-        @Html.DisplayFor(modelItem => item.Descricao)
-        </td>
-        <td>
-        @item.DtTarefaFim.ToString("dd/MM/yyyy")
-        </td>
-        <td>
-        </td>
-        </tr>
-        }
-        </tbody>
-        </table>
-        </div>
-        </div>*@
     </div>
 </div>
 <link rel="stylesheet" href="~/css/listaTarefas.css" />

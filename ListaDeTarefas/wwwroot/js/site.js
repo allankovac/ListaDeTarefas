@@ -70,9 +70,9 @@ function mensagemModal(nome) {
         obj.titulo = "Finalizar Tarefa"; obj.texto = "Deseja mesmo finalizar a(s) tarefa(s)?"; obj.ativo = true;
     } else if (nome == "AjaxFinalizarTarefa") {
         obj.titulo = "Finalizar Tarefa"; obj.texto = "Deseja mesmo finalizar a tarefa?"; obj.ativo = true;
-    } else if (nome = "AjaxRegistrarTarefas") {
+    } else if (nome == "AjaxRegistrarTarefas") {
         obj.titulo = "Adicionar Tarefa"; obj.texto = "Confirma adicionar nova tarefa?"; obj.ativo = true;
-    } else if (nome = "AjaxRestaurarTarefa") {
+    } else if (nome == "AjaxRestaurarTarefa") {
         obj.titulo = "Restaurar Tarefa"; obj.texto = "Confirma restauração da tarefa?"; obj.ativo = true;
     }
     return obj;
